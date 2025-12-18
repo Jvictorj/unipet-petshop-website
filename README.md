@@ -1,8 +1,8 @@
-# **Projeto Unipet**  
+# **Projeto Unipet 🐾**  
 **Sistema para Petshop e Adoção de Animais**  
 
 ## **Visão Geral**  
-O Projeto Unipet é uma aplicação web desenvolvida para gerenciar um petshop que vende produtos relacionados a animais e conecta usuários a locais de adoção. O sistema também oferece funcionalidades para cadastro e consulta de clientes, controle de estoque e gerenciamento de dados de adoção.
+O **Projeto Unipet** é uma aplicação web desenvolvida para gerenciar um petshop que vende produtos relacionados a animais e conecta usuários a locais de adoção. O sistema também oferece funcionalidades para cadastro e consulta de clientes, controle de estoque e gerenciamento de dados de adoção.
 
 Você pode acessar o sistema em:  
 [Projeto Unipet - Visualizar aplicação](https://yurisales11.github.io/projeto-unisuam/)
@@ -10,19 +10,19 @@ Você pode acessar o sistema em:
 ---
 
 ## **Funcionalidades Principais**  
-- **Loja Virtual:**  
+- **🛒 Loja Virtual:**  
   - Catálogo de produtos relacionados a animais.  
   - Controle de estoque.  
-- **Adoção de Animais:**  
+- **🐶 Adoção de Animais:**  
   - Integração com ONGs e locais de adoção.  
-- **Gerenciamento de Usuários:**  
+- **👤 Gerenciamento de Usuários:**  
   - Perfis de acesso para administradores e clientes.  
   - Cadastro, consulta, alteração e exclusão de usuários.  
-- **Autenticação Segura:**  
+- **🔐 Autenticação Segura:**  
   - Login com verificação em dois fatores (2FA).  
-- **Relatórios e Logs:**  
+- **📊 Relatórios e Logs:**  
   - Registro de operações e exportação de relatórios em PDF.  
-- **Acessibilidade:**  
+- **♿ Acessibilidade:**  
   - Troca de contraste e ajuste de tamanho de fonte para maior inclusão.
 
 ---
@@ -52,8 +52,7 @@ Demonstrações visuais do sistema para petshop e adoção de animais:
 - **Back-end:** PHP  
 - **Banco de Dados:** MySQL  
 - **Front-end:** Bootstrap  
-- **Outras Tecnologias:**  
-  - Framework para 2FA  
+- **Outras Tecnologias:**   
   - APIs para adoção e busca de CEP  
 
 ---
@@ -65,6 +64,3 @@ Contribuições são bem-vindas! Se deseja sugerir melhorias ou relatar problema
 3. Aguarde feedback da equipe responsável.  
 
 ---
-
-## **Licença**  
-Este projeto está licenciado sob a [MIT License](LICENSE).  
