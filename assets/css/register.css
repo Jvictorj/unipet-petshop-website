@@ -1,0 +1,301 @@
+/*-----------------------------------*\
+  #PÁGINA DE CADASTRO (Ajustado)
+\*-----------------------------------*/
+
+:root {
+  --portland-orange: rgb(237, 99, 53);
+  --white: #ffffff;
+  --glass-bg: rgba(0, 0, 0, 0.158); /* Fundo mais escuro para legibilidade */
+  --shadow-1: 0 8px 32px 0 rgba(0, 0, 0, 0.158);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container Principal com Imagem de Fundo */
+.containermain {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centraliza verticalmente */
+  background-image: url('../img/fotoslogin/fotobackgroundlogin.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Área do Formulário (Vidro) */
+.containerform {
+  width: 100%;
+  max-width: 1000px;
+  background-color: var(--glass-bg);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-1);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  display: flex;
+  overflow: hidden; /* Mantém bordas arredondadas */
+  max-height: 90vh; /* Limita altura para caber na tela */
+}
+
+/* Lado Esquerdo (Logo e Texto) */
+.containertop {
+  width: 40%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.055); /* Leve escurecimento */
+  color: white;
+  text-align: center;
+}
+
+.logoimglogin img {
+  max-width: 180px;
+  margin-bottom: 20px;
+}
+
+.mensagemlogin {
+  width: 100%;
+}
+
+.mensagemlogin p {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.mensagemlogin b {
+  font-weight: 700;
+}
+
+/* Barra de Progresso */
+.progressbar {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.progressbar ul {
+  display: flex;
+  padding: 0;
+  list-style: none;
+  align-items: center;
+}
+
+.progressbar ul li {
+  position: relative;
+  margin: 0 25px; /* Espaço entre bolinhas */
+}
+
+/* Linha conectora */
+.progressbar ul li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* Começa logo após a bolinha */
+  width: 50px; /* Largura da linha */
+  height: 2px;
+  background: white;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Bolinhas */
+.p1, .p2 {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+  background: transparent; /* Padrão transparente */
+}
+
+/* Passo Ativo */
+.active .p1, .active .p2 {
+  background-color: var(--portland-orange);
+  border-color: var(--portland-orange);
+  box-shadow: 0 0 10px rgba(237, 99, 53, 0.5);
+}
+
+/* Lado Direito (Formulário com Scroll) */
+.containerdireita {
+  width: 60%;
+  padding: 40px;
+  overflow-y: auto; /* Permite rolar se tiver muitos campos */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--portland-orange) rgba(255,255,255,0.1);
+}
+
+/* Estilo da barra de rolagem (Chrome/Edge) */
+.containerdireita::-webkit-scrollbar { width: 8px; }
+.containerdireita::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); }
+.containerdireita::-webkit-scrollbar-thumb { background: var(--portland-orange); border-radius: 4px; }
+
+/* Inputs */
+.input-box {
+  margin-bottom: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 15px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.input-box input:focus {
+  border-color: var(--portland-orange);
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+.input-box input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+/* Select */
+.input-boxsex {
+  margin-bottom: 20px;
+}
+
+.input-boxsex label {
+  display: block;
+  color: white;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.input-boxsex select {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.input-boxsex select option {
+  background-color: #333; /* Fundo escuro nas opções para ler melhor */
+  color: white;
+}
+
+/* Botões */
+.btncadastrar {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btncadastrar button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+#enviar {
+  background-color: var(--portland-orange);
+  color: white;
+}
+
+#enviar:hover {
+  background-color: #ff4500;
+  box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+}
+
+#limpar {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+#limpar:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Link Voltar */
+.voltaraohome {
+  text-align: center;
+  margin-top: 25px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.voltaraohome a {
+  color: var(--portland-orange);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.voltaraohome a:hover { text-decoration: underline; }
+
+/* Toasts */
+#toast, #toast2 {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.3s, bottom 0.3s;
+  z-index: 9999;
+}
+
+#toast.show, #toast2.show {
+  opacity: 1;
+  bottom: 30px; /* Efeito de subir */
+}
+
+/* Responsividade Mobile */
+@media (max-width: 900px) {
+  .containerform {
+    flex-direction: column;
+    max-height: none; /* Remove limite de altura no mobile */
+    height: auto;
+  }
+
+  .containertop {
+    width: 100%;
+    padding: 30px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .containerdireita {
+    width: 100%;
+    padding: 30px 20px;
+    overflow-y: visible; /* Scroll nativo da página */
+  }
+
+  .progressbar ul li:not(:last-child)::after {
+    width: 30px; /* Linha menor no mobile */
+  }
+}

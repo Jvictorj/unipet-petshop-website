@@ -1,0 +1,93 @@
+.contener-pai{
+
+max-width: 80%;
+width: 80%;
+margin-left: 11%;
+margin-top: 5%;}
+
+.mensagem-boas-vinda{
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;}
+
+
+input[type=submit]  {background-color: rgba(255, 115, 0, 0.867);
+    cursor: pointer;
+max-width: 100%;
+width: 15%;
+border-radius: 8px;
+color: white;}
+
+input[type=submit]:hover{opacity: 0.8;}
+
+.row{
+display: flex;
+}
+
+.listas{border: 1px solid gray;
+display: flex;
+flex-direction: column;
+border-radius: 10px;
+justify-content: center;
+max-width: 100%;
+width: 25%;
+height: 390px;
+}
+
+.lista_func a {
+    display: flex;
+    height: 55px;
+max-width: 100%;
+padding: 15px 15px;}
+
+.lista_func a:hover{background-color: rgb(196, 196, 196);
+    border-radius: 10px;}
+
+.lista_func i {padding: 0px 15px;}
+
+.big-box{
+   
+max-width: 100%;
+width: 100%;
+padding: 0px 25px;}
+
+.big-box .busca {
+    align-items: center;
+display: flex;
+max-width: 100%;
+gap: 2%;
+width: 35%;}
+
+.inputbuscarmp{border: 1px solid gray;
+border-radius: 10px;
+width: 50%;
+height: 40px;}
+
+.big-box .busca button{background-color:rgba(255, 115, 0, 0.867);
+    color: rgb(255, 255, 255);
+max-width: 100%;
+width: 35%;
+border-radius: 10px;
+cursor: pointer;
+height: 40px;}
+
+.busca button:hover{opacity: 0.8;}
+
+.big-box .informativo {
+display: flex;
+justify-content: space-around;
+background-color: rgba(255, 115, 0, 0.867);
+border-radius: 10px}
+
+
+.big-box  .respota-pedido{
+display: flex;
+justify-content: center;
+border: 1px solid gray;
+padding: 35px 0px;
+font-size: 3rem;}
+
+
+footer{margin-top: 10%;}

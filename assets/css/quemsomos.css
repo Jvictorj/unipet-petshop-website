@@ -1,0 +1,511 @@
+/*-----------------------------------*\
+  #QUEM SOMOS (Página Institucional)
+\*-----------------------------------*/
+
+:root {
+  --portland-orange: rgb(8, 138, 40);
+  --cor-secundaria: rgb(0, 0, 0);
+  --fs-1: 6.5rem;
+  --fs-2: 3.2rem;
+  --fs-3: 2.4rem;
+  --fs-4: 2rem;
+  --fs-5: 1.8rem;
+  --fs-6: 1.5rem;
+  --fs-7: 1.4rem;
+  --fs-8: 1rem;
+}
+
+hr {
+  width: 85%;
+  margin: 0px auto;
+  border: 1px solid rgb(255, 145, 0);
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+img { max-width: 100%; }
+
+.containermain {
+  margin-left: 10%;
+}
+
+.container {
+  display: flex;
+}
+
+.contentimg {
+  display: flex;
+  margin-bottom: 2%;
+}
+
+.containerheaddescription {
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0px;
+  max-width: 55%;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+}
+
+.description h1 {
+  color: var(--cor-secundaria);
+  font-size: 22px;
+  margin-top: 2%;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-left: 5%;
+}
+
+.description h4 {
+  color: var(--cor-secundaria);
+  font-size: 20px;
+  font-weight: 100;
+  margin-left: 5%;
+  line-height: 1.5;
+}
+
+/* Botão Comprar / Ação */
+.btncomprar {
+  width: 100%;
+  display: flex;
+}
+
+.comprar {
+  width: 60%;
+  background-color: rgb(255, 132, 0);
+  color: white;
+  font-size: 1.8rem;
+  border-radius: 12px;
+  padding: 20px 20px;
+  margin-left: 4%;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.comprar:hover { opacity: 0.7; }
+
+/* Vídeo */
+.videodescription {
+  display: flex;
+  align-items: center;
+  max-width: 35%;
+}
+
+.videosrc {
+  max-width: 100%;
+  border-radius: 50px;
+}
+
+/* Seção 2 */
+.container2 {
+  max-width: 100%;
+  display: flex;
+}
+
+.contentimg2 { max-width: 100%; }
+
+.contentimg2 img {
+  width: 100%;
+  border-radius: 70px;
+}
+
+.containerheaddescription2 {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+/* Seção 3 */
+.contentimg3 {
+  max-width: 100%;
+  margin-top: 5%;
+}
+
+.contentimg3 img {
+  width: 100%;
+  border-radius: 70px;
+}
+
+/* Cards */
+.containercard {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  margin-top: 6%;
+  justify-content: center;
+  max-width: 100%;
+  width: 60%;
+  border-radius: 30px;
+}
+
+.containercard-conteudo h1 {
+  color: var(--cor-secundaria);
+  font-size: 22px;
+  margin-left: 5%;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.containercard-conteudo h4 {
+  color: var(--cor-secundaria);
+  font-size: 22px;
+  margin-top: 2%;
+  font-weight: 600;
+  margin-left: 5%;
+  line-height: 1.5;
+}
+
+.containercard1 {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  margin-top: 6%;
+  justify-content: center;
+  max-width: 100%;
+  width: 55%;
+  border-radius: 25px;
+}
+
+.containercard2:hover { opacity: 0.8; }
+
+.container3 {
+  max-width: 100%;
+  display: flex;
+}
+
+.containerheaddescription3 {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+/* Galeria Grid */
+.container4 {
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+}
+
+.containercard3 {
+  padding: 100px 200px;
+  display: flex;
+  margin-top: 2%;
+}
+
+.containercard3:hover { opacity: 0.6; }
+
+/* Seção Final */
+.containerfinal {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.containerboxfinal { max-width: 100%; }
+
+.containerboximgdescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+.imgboxfinal {
+  max-width: 100%;
+  width: 35%;
+}
+
+.imgboxfinal img {
+  max-width: 100%;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.descripitionimg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  margin: 10px 20px;
+  border-radius: 10px;
+}
+
+.descripitionimg h1 {
+  font-size: 2.4rem;
+  color: var(--cor-secundaria);
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.descripitionimg p {
+  font-size: 2.2rem;
+  color: var(--cor-secundaria);
+  text-align: center;
+}
+
+.btnsaibamais {
+  color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btnsaiba {
+  display: flex;
+  width: 100%;
+  background-color: rgb(255, 132, 0);
+  font-size: 1.8rem;
+  border-radius: 12px;
+  padding: 20px 20px;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+
+.btnsaiba button { color: white; }
+.btnsaiba:hover { opacity: 0.8; }
+
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+
+@media screen and (max-width: 1200px) {
+  .videodescription {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .videosrc {
+    max-width: 100%;
+    border-radius: 50px;
+  }
+
+  .btncomprar {
+    width: 100%;
+    display: flex;
+  }
+
+  .comprar {
+    width: 100%;
+    font-size: 1.8rem;
+    border-radius: 12px;
+    padding: 20px 20px;
+    margin-top: 5%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .img-desktop { display: none; }
+  .containermain { margin-left: 1%; }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contentimg {
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contentimg img { width: 100%; }
+
+  .containerheaddescription {
+    display: flex;
+    flex-direction: column;
+    padding: 60px 0px;
+    max-width: 95%;
+  }
+
+  .contentimg2 img {
+    width: 100%;
+    border-radius: 70px;
+  }
+
+  .videodescription {
+    justify-content: center;
+    max-width: 100%;
+    margin-bottom: 5%;
+  }
+
+  .videosrc { max-width: 80%; }
+
+  .container2 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .containerheaddescription2 {
+    width: 80%;
+    max-width: 100%;
+  }
+
+  .containercard {
+    width: 80%;
+    height: 100%;
+  }
+
+  .container3 { flex-direction: column; }
+
+  .containerheaddescription3 {
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .contentimg3 {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contentimg3 img {
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
+
+  .containercard1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+
+  .imgboxfinal { width: 80%; }
+  .descripitionimg { width: 80%; }
+}
+
+@media screen and (max-width: 500px) {
+  .containercard3 {
+    padding: 100px auto;
+    display: flex;
+    margin-top: 2%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .containermain { margin-left: 1%; }
+  
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contentimg { width: 100%; max-width: 100%; }
+  .containerheaddescription { max-width: 95%; }
+  
+  .videodescription {
+    justify-content: center;
+    max-width: 100%;
+    margin-bottom: 5%;
+  }
+
+  .videosrc { max-width: 80%; }
+
+  .container2 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .containercard {
+    width: 80%;
+    height: 100%;
+  }
+
+  .contentimg3 {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contentimg3 img {
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
+
+  .containercard1 {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+
+  .imgboxfinal { width: 80%; }
+  .descripitionimg { width: 80%; }
+
+  .containercard3 {
+    padding: 100px auto;
+    display: flex;
+    margin-top: 2%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .containermain { margin-left: 1%; }
+  
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contentimg {
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .containerheaddescription { max-width: 95%; }
+  .videodescription { margin-bottom: 5%; }
+  .videosrc { max-width: 80%; }
+
+  .container2 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .containercard {
+    width: 100%;
+    height: 100%;
+  }
+
+  .contentimg3 {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contentimg3 img {
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
+
+  .containercard1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+    height: 100%;
+  }
+
+  .imgboxfinal { width: 80%; }
+  .descripitionimg { width: 80%; }
+}

@@ -1,0 +1,80 @@
+/*-----------------------------------*\
+  #ALTERAR SENHA
+\*-----------------------------------*/
+
+.Redefiner-senha {
+  max-width: 100%;
+  width: 100%;
+  padding: 0px 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.contener-newSenha {
+  border: 1px solid gray;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.top {
+  background-color: rgba(128, 128, 128, 0.475);
+  padding: 15px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.space-senha { padding: 20px; }
+
+.input-box {
+  margin-bottom: 20px;
+}
+
+.input-box label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.input-box input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fe9000ce;
+  padding: 10px 5px;
+  transition-duration: 0.2s;
+  outline: none;
+  font-size: 1.6rem;
+}
+
+.input-box input:focus { border-bottom: 2px solid #fe9000; }
+
+.btn-att {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-att input {
+  width: 80%;
+  padding: 12px;
+  background-color: rgba(255, 115, 0, 0.867);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: 0.3s;
+}
+
+.btn-att input:hover { opacity: 0.8; }
+
+@media screen and (max-width: 1024px) {
+  .Redefiner-senha { padding: 0; }
+  .contener-newSenha { max-width: 100%; }
+}

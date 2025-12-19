@@ -1,0 +1,261 @@
+/*-----------------------------------*\
+  #PAINEL DE CONTROLE (REDESIGN)
+\*-----------------------------------*/
+
+:root {
+  --primary-color: #ed6335; /* Portland Orange */
+  --secondary-color: #fb3997; /* Pink */
+  --accent-color: #fecf12; /* Yellow */
+  --text-dark: #333333;
+  --text-gray: #666666;
+  --bg-body: #f4f7f6;
+  --bg-card: #ffffff;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-body);
+  font-family: 'Nunito Sans', sans-serif;
+  color: var(--text-dark);
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.contener-pai {
+  max-width: 1200px;
+  width: 95%;
+  margin: 40px auto;
+  min-height: 80vh;
+}
+
+/* --- BANNER DE BOAS VINDAS --- */
+.mensagem-boas-vinda {
+  background: linear-gradient(135deg, #ffffff 0%, #fff5f0 100%);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  border-left: 5px solid var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.mensagem-boas-vinda h1 {
+  font-size: 2.2rem;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+  font-weight: 800;
+}
+
+.mensagem-boas-vinda span {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+}
+
+.mensagem-boas-vinda span b {
+  color: var(--primary-color);
+}
+
+.mensagem-boas-vinda span span {
+  background-color: var(--accent-color);
+  color: #333;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* --- LAYOUT GRID (SIDEBAR + CONTEÚDO) --- */
+.row {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* --- MENU LATERAL (SIDEBAR) --- */
+.listas {
+  flex: 0 0 280px; /* Largura fixa */
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  position: sticky;
+  top: 20px;
+}
+
+.listas ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista_func {
+  border-bottom: 1px solid #f0f0f0;
+  transition: var(--transition);
+}
+
+.lista_func:last-child {
+  border-bottom: none;
+}
+
+.lista_func a {
+  display: flex;
+  align-items: center;
+  padding: 18px 25px;
+  text-decoration: none;
+  color: var(--text-gray);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: var(--transition);
+  border-left: 4px solid transparent;
+}
+
+.lista_func i {
+  font-size: 1.3rem;
+  margin-right: 15px;
+  color: #bbb;
+  transition: var(--transition);
+}
+
+/* Hover e Efeitos do Menu */
+.lista_func:hover {
+  background-color: #fff9f6;
+}
+
+.lista_func:hover a {
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+}
+
+.lista_func:hover i {
+  color: var(--primary-color);
+}
+
+/* Item de Destaque (Sair) */
+.lista_func a[href*="logout"] {
+  color: #dc3545;
+}
+.lista_func a[href*="logout"]:hover {
+  background-color: #fff5f5;
+  border-left-color: #dc3545;
+  color: #dc3545;
+}
+.lista_func a[href*="logout"] i { color: #dc3545; }
+
+/* Item Ativo (Dashboard) */
+.lista_func[style*="background-color: #fecf12"] a {
+  color: #333 !important;
+  background-color: var(--accent-color) !important;
+}
+
+/* --- CONTEÚDO PRINCIPAL (DASHBOARD) --- */
+.big-box {
+  flex: 1;
+}
+
+/* Estilizando os Cards do Dashboard que estão no PHP inline */
+.big-box > div > div {
+  background: var(--bg-card) !important;
+  padding: 30px !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-card) !important;
+  text-align: center !important;
+  transition: var(--transition) !important;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.big-box > div > div:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover) !important;
+  border-color: #eee;
+}
+
+.big-box i {
+  margin-bottom: 15px;
+  display: block;
+}
+
+.big-box h3 {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.big-box p {
+  font-size: 2.5rem !important;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.big-box small {
+  display: block;
+  margin-top: 10px;
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.big-box a {
+  margin-top: 15px;
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: #f0f8ff;
+  color: var(--blue-marine);
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: var(--transition);
+}
+
+.big-box a:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media screen and (max-width: 900px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .listas {
+    width: 100%;
+    position: static;
+    margin-bottom: 30px;
+  }
+
+  /* Transforma menu em grid no mobile */
+  .listas ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .lista_func { border: 1px solid #eee; margin: -1px; }
+}
+
+@media screen and (max-width: 600px) {
+  .listas ul {
+    grid-template-columns: 1fr; /* 1 coluna no celular */
+  }
+  
+  .mensagem-boas-vinda h1 { font-size: 1.8rem; }
+  
+  .big-box > div {
+    grid-template-columns: 1fr !important; /* Cards empilhados */
+  }
+}

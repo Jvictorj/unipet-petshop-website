@@ -1,0 +1,150 @@
+/*-----------------------------------*\
+  #ESTILO DA ÁREA MASTER (Gerência)
+  Ficheiro: assets/css/master-style.css
+\*-----------------------------------*/
+
+:root {
+  --master-dark: #2c3e50;
+  --master-gold: #fecf12;
+  --primary-color: #fb3997;
+  --text-color: #333;
+  --bg-light: #f4f7f6;
+  --white: #ffffff;
+  --radius: 8px;
+  --shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* Layout Geral */
+.master-main {
+  background-color: var(--bg-light);
+  min-height: 85vh;
+  padding: 40px 20px;
+}
+
+.master-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--master-dark);
+}
+
+/* Cabeçalho da Página */
+.master-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+}
+
+.master-title {
+  font-size: 1.8rem;
+  color: var(--master-dark);
+  font-weight: 800;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.master-title i { color: var(--master-gold); }
+
+/* Botões */
+.btn-master {
+  background-color: var(--master-dark);
+  color: var(--master-gold);
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-master:hover {
+  background-color: #1a252f;
+  transform: translateY(-2px);
+}
+
+.btn-save {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+.btn-save:hover { background-color: #d9267c; }
+
+/* Tabelas */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.master-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.master-table thead tr {
+  background-color: var(--master-dark);
+  color: white;
+  text-align: left;
+}
+
+.master-table th, 
+.master-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.master-table tbody tr:hover {
+  background-color: #fff9e6; /* Leve amarelo ao passar o mouse */
+}
+
+/* Badges de Cargo */
+.badge {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  display: inline-block;
+}
+
+.badge-cliente { background-color: #6c757d; } /* Cinza */
+.badge-admin { background-color: #17a2b8; }   /* Azul */
+.badge-master { background-color: #fecf12; color: #333; } /* Dourado */
+
+/* Formulário na Tabela */
+.form-inline {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.select-cargo {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .master-header { flex-direction: column; gap: 15px; align-items: flex-start; }
+  .form-inline { flex-direction: column; align-items: flex-start; }
+  .btn-save { width: 100%; }
+}

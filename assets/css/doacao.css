@@ -1,0 +1,297 @@
+/*-----------------------------------*\
+  #PÁGINA DE DOAÇÃO
+\*-----------------------------------*/
+
+:root {
+  --portland-orange: rgb(8, 138, 40);
+  --cor-secundaria: rgb(0, 0, 0);
+  --fs-1: 6.5rem;
+  --fs-2: 3.2rem;
+  --fs-3: 2.4rem;
+  --fs-4: 2rem;
+  --fs-5: 1.8rem;
+  --fs-6: 1.5rem;
+  --fs-7: 1.4rem;
+  --fs-8: 1rem;
+}
+
+hr {
+  width: 95%;
+  margin: 0px auto;
+  border: 1px solid rgb(255, 145, 0);
+}
+
+img { max-width: 100%; }
+
+/*-----------------------------------*\
+  #LAYOUT PRINCIPAL
+\*-----------------------------------*/
+
+.container { display: flex; }
+
+.containerheaddescription {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  padding: 60px 0px;
+  max-width: 40%;
+}
+
+.contentimg { margin-left: 4%; }
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.description h1 {
+  color: var(--cor-secundaria);
+  font-size: 22px;
+  margin-top: 2%;
+  font-weight: 600;
+  margin-left: 6%;
+  line-height: 1.5;
+}
+
+.description h4 {
+  color: var(--cor-secundaria);
+  font-size: 20px;
+  font-weight: 100;
+  margin-left: 6%;
+  line-height: 1.5;
+}
+
+/* Botão de Ação */
+.btncomprar {
+  width: 100%;
+  display: flex;
+}
+
+.comprar {
+  width: 60%;
+  background-color: rgb(255, 132, 0);
+  color: white;
+  font-size: 1.8rem;
+  border-radius: 12px;
+  margin-bottom: 5%;
+  padding: 20px 20px;
+  margin-left: 6%;
+  margin-top: 5%;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+.comprar:hover { opacity: 0.7; }
+
+/* Imagens e Vídeos */
+.imgdescription {
+  display: flex;
+  justify-content: center;
+  margin-left: 5%;
+  align-items: center;
+  max-width: 35%;
+}
+
+.imgdescription img {
+  width: 65%;
+  border-radius: 100px;
+}
+
+.videodescription {
+  display: flex;
+  margin-left: 5%;
+  align-items: center;
+  max-width: 35%;
+}
+
+.videosrc {
+  max-width: 100%;
+  border-radius: 50px;
+}
+
+/* Seções de Texto e Box */
+.container2 {
+  max-width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.containerbox {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 100%;
+  width: 75%;
+}
+
+.containerbox h1 {
+  font-size: 2.8rem;
+  color: rgb(255, 111, 0);
+}
+
+.containerbox p {
+  font-size: 1.8rem;
+  color: #1a1919;
+  margin-bottom: 2%;
+}
+
+/* Box Azul (Dúvidas) */
+.containerbox3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(168, 204, 255);
+  max-width: 100%;
+  width: 60%;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.containerbox3 h1 {
+  font-size: 2.8rem;
+  color: var(--cor-secundaria);
+}
+
+.containerbox3 p {
+  font-size: 1.8rem;
+  color: var(--cor-secundaria);
+  margin-bottom: 2%;
+}
+
+.title { margin-top: 2%; }
+.title p { color: var(--cor-secundaria); }
+
+.imgbox {
+  max-width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.imgbox a {
+  display: flex;
+  justify-content: center;
+}
+
+.imgbox img {
+  width: 70%;
+  border-radius: 40px;
+  margin-bottom: 2%;
+}
+
+/* Botão Perguntas Frequentes */
+.boxbtnpgtfrequentes {
+  display: flex;
+  justify-content: center;
+}
+
+.btnpgtfrequentes {
+  width: 30%;
+  background-color: #59D5E0;
+  color: white;
+  justify-content: center;
+  font-size: 1.8rem;
+  border-radius: 12px;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  padding: 20px 20px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+.btnpgtfrequentes:hover { opacity: 0.8; }
+
+/* Botão Voltar ao Topo */
+#link-topo {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  background-color: #FF914D;
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 10px #333;
+}
+
+/*-----------------------------------*\
+  #RESPONSIVIDADE
+\*-----------------------------------*/
+
+@media screen and (max-width: 1200px) {
+  .videodescription {
+    display: flex;
+    margin-left: 5%;
+    align-items: center;
+    max-width: 50%;
+  }
+
+  .btncomprar {
+    width: 100%;
+    display: flex;
+  }
+
+  .comprar {
+    width: 80%;
+    margin-left: 6%;
+    margin-top: 5%;
+  }
+
+  .containerbox3 {
+    width: 100%;
+  }
+
+  .btnpgtfrequentes { width: 50%; }
+}
+
+@media screen and (max-width: 768px) {
+  .img-desktop { display: none; }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .containerheaddescription {
+    margin-left: 10%;
+    padding: 60px 0px;
+    max-width: 80%;
+  }
+
+  .contentimg {
+    display: flex;
+    justify-content: center;
+  }
+
+  .videodescription {
+    justify-content: center;
+    margin-left: 10%;
+    align-items: center;
+    max-width: 80%;
+  }
+
+  .videosrc { width: 100%; }
+
+  .comprar {
+    width: 100%;
+    margin-left: 0; /* Centraliza */
+  }
+
+  .imgbox {
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .imgbox img { width: 100%; }
+
+  .containerbox3 h1 { font-size: 2.8rem; }
+  .containerbox3 p { font-size: 1.6rem; }
+}

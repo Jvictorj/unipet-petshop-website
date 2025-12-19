@@ -1,0 +1,144 @@
+/*-----------------------------------*\
+  #MEUS PEDIDOS
+\*-----------------------------------*/
+
+/* Container Principal */
+.big-box {
+  flex: 1;
+  width: 100%;
+}
+
+/* --- Barra de Busca --- */
+.busca {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+.busca form {
+  display: flex;
+  gap: 10px;
+}
+
+.inputbuscarmp {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.busca button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.busca button:hover {
+  background-color: #fb3997;
+}
+
+/* --- Lista de Pedidos (Tabela Visual) --- */
+.barra-de-pedidos {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  overflow: hidden; /* Arredonda cantos */
+}
+
+/* Cabeçalho da Tabela */
+.informativo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 Colunas: Pedido, Valor, Status */
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  border-bottom: 2px solid #eee;
+}
+
+.informativo div {
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Conteúdo (Linhas de Pedidos) */
+/* Adicionei esta classe para quando tiver pedidos reais */
+.linha-pedido {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.linha-pedido:last-child {
+  border-bottom: none;
+}
+
+.linha-pedido:hover {
+  background-color: #fff9fc; /* Leve rosa no hover */
+}
+
+.pedido, .Valor, .Status {
+  font-size: 1rem;
+  color: #333;
+}
+
+.Valor {
+  font-weight: bold;
+  color: #28a745; /* Verde para dinheiro */
+}
+
+/* Badges de Status */
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.status-pendente { background-color: #ffc107; color: #333; }
+.status-pago { background-color: #28a745; }
+.status-cancelado { background-color: #dc3545; }
+
+/* Mensagem de Vazio */
+.respota-pedido {
+  padding: 50px 20px;
+  text-align: center;
+  color: #888;
+}
+
+.respota-pedido span {
+  font-size: 1.1rem;
+  display: block;
+}
+
+/* Ícone grande (opcional, adicione no HTML se quiser) */
+.respota-pedido i {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .informativo, .linha-pedido {
+    grid-template-columns: 1fr 1fr; /* Remove coluna status ou ajusta */
+    gap: 10px;
+  }
+  
+  .Status { grid-column: span 2; }
+}

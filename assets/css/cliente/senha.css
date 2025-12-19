@@ -1,0 +1,146 @@
+/* Layout da Página de Senha */
+.senha-wrapper {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f7f6; /* Fundo suave */
+    padding: 20px;
+}
+
+.senha-card {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+/* Cabeçalho do Card */
+.senha-header i {
+    font-size: 3rem;
+    color: #fb3997;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.senha-header h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.senha-header p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+/* Mensagens de Erro/Sucesso */
+.msg-erro {
+    background: #fff2f2;
+    color: #d32f2f;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 0.9rem;
+    border-left: 4px solid #d32f2f;
+}
+
+.msg-sucesso {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 0.9rem;
+    border-left: 4px solid #2e7d32;
+}
+
+/* Formulário */
+.senha-form { text-align: left; }
+
+.grupo-input { margin-bottom: 20px; }
+
+.grupo-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+/* Input com Ícone */
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 12px 15px 12px 45px; /* Espaço para o ícone */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: 0.3s;
+    background-color: #fcfcfc;
+}
+
+.input-icon input:focus {
+    border-color: #fb3997;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(251, 57, 151, 0.1);
+}
+
+/* Botão Salvar */
+.btn-salvar {
+    width: 100%;
+    padding: 14px;
+    background-color: #fb3997;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-salvar:hover {
+    background-color: #d9267c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(251, 57, 151, 0.3);
+}
+
+/* Link Voltar */
+.voltar-link {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.voltar-link a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.voltar-link a:hover {
+    color: #333;
+}

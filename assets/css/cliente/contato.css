@@ -1,0 +1,43 @@
+/*-----------------------------------*\
+  #CONTATO INTERNO
+\*-----------------------------------*/
+
+.contenet-contato {
+  padding: 15px 25px;
+  width: 100%;
+}
+
+.contener-inputs {
+  width: 100%;
+}
+
+.inputs {
+  margin-bottom: 20px;
+}
+
+.inputs label {
+  display: block;
+  font-size: 1.4rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.contener-inputs input {
+  width: 100%;
+  background-color: #ffffff00;
+  border: none;
+  border-bottom: 1px solid #fe9000ce;
+  padding: 10px 15px;
+  transition-duration: 0.2s;
+  border-radius: 0px;
+  outline: none;
+  font-size: 1.6rem;
+}
+
+.contener-inputs input:focus {
+  border-bottom: 2px solid #fe9000;
+}
+
+@media screen and (max-width: 1024px) {
+  .contenet-contato { padding: 0; }
+}
