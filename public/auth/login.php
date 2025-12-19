@@ -65,7 +65,7 @@ if (isset($_SESSION['user_id'])) {
         }
         ?>
 
-        <form method="post" action="../app/acao/login.php" class="containerdireita">
+        <form method="post" action="../app/actions/login.php" class="containerdireita">
           <div class="tiltelogin">
             <p><b>Acesse usando seu Login ou CPF</b></p>
           </div>

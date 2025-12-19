@@ -101,7 +101,7 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
                             </div>
 
                             <div class="variaveis" style="width: 50px; text-align: center;">
-                                <a href="../app/acao/remover_carrinho.php?id=<?php echo $item['id']; ?>" style="color: red; font-size: 1.5rem;" title="Remover">
+                                <a href="../app/actions/remover_carrinho.php?id=<?php echo $item['id']; ?>" style="color: red; font-size: 1.5rem;" title="Remover">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </div>

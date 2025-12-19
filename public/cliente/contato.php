@@ -21,7 +21,7 @@ require_once '../app/includes/header.php';
 <body>
     <section class="form-container">
         <div class="container">
-            <form method="post" action="../app/acao/envia.php">
+            <form method="post" action="../app/actions/envia.php">
                 <h1>Entre em contato </h1>
                 <p> Preencha o formulário abaixo e entraremos em contato com você.</p>
                 

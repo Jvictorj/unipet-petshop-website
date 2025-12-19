@@ -99,7 +99,7 @@ require_once '../app/includes/header.php';
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
-                                <a href="../app/acao/produto_delete.php?id=<?php echo $p['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir este produto?')" class="btn-action btn-delete" title="Excluir">
+                                <a href="../app/actions/produto_delete.php?id=<?php echo $p['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir este produto?')" class="btn-action btn-delete" title="Excluir">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>

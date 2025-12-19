@@ -37,7 +37,7 @@ require_once '../app/includes/header.php';
                 </div>
             <?php endif; ?>
 
-            <form action="../app/acao/atualizar_senha.php" method="POST" class="senha-form">
+            <form action="../app/actions/atualizar_senha.php" method="POST" class="senha-form">
                 
                 <div class="grupo-input">
                     <label for="nova_senha">Nova Senha</label>

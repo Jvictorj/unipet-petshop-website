@@ -7,7 +7,7 @@ if (file_exists('../includes/conexao.php')) {
 } elseif (file_exists('../../app/includes/conexao.php')) {
     require_once '../../app/includes/conexao.php';
 } else {
-    die("Erro: Arquivo de conexão não encontrado em app/acao/favoritar.php");
+    die("Erro: Arquivo de conexão não encontrado em app/actions/favoritar.php");
 }
 
 // Verifica login

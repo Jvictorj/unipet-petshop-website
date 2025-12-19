@@ -62,7 +62,7 @@ require_once '../app/includes/header.php';
                                 <img src="../assets/img/produtos/<?php echo $capa; ?>" alt="<?php echo $prod['nome']; ?>">
                             </a>
                             
-                            <a href="../app/acao/favoritar.php?id=<?php echo $prod['id']; ?>&origem=lista" 
+                            <a href="../app/actions/favoritar.php?id=<?php echo $prod['id']; ?>&origem=lista" 
                                class="btn-remove" 
                                title="Remover dos favoritos">
                                 <i class="bi bi-x-lg"></i>
