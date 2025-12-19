@@ -125,7 +125,7 @@ VALUES
     'Médio'
 );
 
--- Usuário Admin (Senha: 123123123)
+-- Usuário Admin (Senha: 123)
 -- OBS: Recomenda-se criar um novo via sistema para garantir que o hash funcione
 INSERT INTO usuario (nome_completo, data_nascimento, sexo, nome_materno, cpf, email, telefone_celular, endereco_completo, login, senha_hash, nivel_acesso)
 VALUES (
