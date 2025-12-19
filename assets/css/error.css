@@ -1,0 +1,102 @@
+/*-----------------------------------*\
+  #PÁGINA DE ERRO
+\*-----------------------------------*/
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* Menu Fixo Simples para Erro */
+.menu {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+
+.unipetlogo {
+  max-width: 35%;
+  width: 14%;
+  display: flex;
+  margin: 0px 11%;
+  align-items: center;
+  cursor: auto;
+}
+
+#logonav {
+  max-width: 100%;
+  display: flex;
+  margin: auto;
+}
+
+.ambienteseguro {
+  margin: 0% 10%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ambienteseguro h1 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(117, 117, 117);
+  font-size: 2rem;
+}
+
+.linha-vertical {
+  color: gray;
+  height: 30px;
+  border-left: 1px solid;
+}
+
+/* Corpo do Erro */
+.containerbody {
+  max-width: 100%;
+  height: 60vh;
+  gap: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title { font-size: 2.8rem; }
+.title h1 { color: rgb(255, 132, 0); }
+
+.descriptiontitle {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+.btncontato {
+  width: 50%;
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.btnconosco {
+  width: 60%;
+  background-color: rgb(255, 132, 0);
+  color: white;
+  font-size: 1.8rem;
+  border-radius: 12px;
+  margin-bottom: 5%;
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btnconosco:hover { opacity: 0.8; }

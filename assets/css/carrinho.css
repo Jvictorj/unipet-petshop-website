@@ -1,0 +1,184 @@
+/*-----------------------------------*\
+  #CARRINHO DE COMPRAS
+\*-----------------------------------*/
+
+:root {
+  --portland-orange: rgb(8, 138, 40);
+  --cor-secundaria: rgb(0, 0, 0);
+  --cor-primaria: rgb(255, 255, 255);
+}
+
+.dark-theme {
+  --cor-primaria: rgb(0, 0, 0);
+  --cor-secundaria: rgb(255, 255, 255);
+}
+
+body {
+  font-family: sans-serif;
+  color: var(--cor-secundaria);
+  background-color: var(--cor-primaria);
+}
+
+section {
+  margin-left: 5%; /* Ajustado */
+  margin-top: 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding-bottom: 50px;
+}
+
+/* Coluna Esquerda (Produtos) */
+.containerbox {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  gap: 20px;
+}
+
+.title h1 {
+  font-size: 3rem;
+  color: var(--cor-secundaria);
+  margin-bottom: 20px;
+}
+
+.caixamensagem {
+  color: white;
+  background-color: rgb(31, 156, 214);
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.caixamensagem p {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Títulos da Tabela */
+.containertitle {
+  font-weight: bold;
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.containertitle .titulo { width: 50%; }
+.containertitle .variaveis { 
+  display: flex; 
+  justify-content: center; 
+  width: 16.6%; 
+}
+
+/* Item do Carrinho */
+.containerproduto {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  height: 120px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  color: var(--cor-secundaria);
+  background-color: var(--cor-primaria);
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.containerproduto .produto {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  gap: 15px;
+}
+
+.containerproduto img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.containerproduto .variaveisproduto {
+  width: 16.6%;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Coluna Direita (Resumo) */
+.containerbox02 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 25%;
+  min-width: 300px;
+  border: 1px solid #eee;
+  padding: 20px;
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.containerbox02 .title h1 { font-size: 2.2rem; }
+
+.resumopedido {
+  font-size: 1.6rem;
+  color: var(--cor-secundaria);
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.pedidopreco {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pedidopreco p { font-size: 1.6rem; }
+.pedidopreco h2 { font-size: 2rem; font-weight: bold; }
+
+/* Botões de Ação */
+.btnaction {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btnpagamento {
+  background-color: #ff5500;
+  color: white;
+  width: 100%;
+  border-radius: 10px;
+  height: 50px;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btnescolher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #59D5E0;
+  width: 100%;
+  border-radius: 10px;
+  height: 50px;
+  font-size: 1.6rem;
+  color: var(--cor-secundaria);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btnpagamento:hover, .btnescolher:hover { opacity: 0.8; }
+
+/* Responsividade */
+@media screen and (max-width: 1000px) {
+  section { flex-direction: column; align-items: center; margin-left: 0; }
+  .containerbox { width: 90%; }
+  .containerbox02 { width: 90%; }
+}

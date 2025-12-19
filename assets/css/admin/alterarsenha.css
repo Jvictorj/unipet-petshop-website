@@ -1,0 +1,40 @@
+.Redefiner-senha{
+    max-width: 100%;
+    width: 100%;
+    padding: 0px 25px}
+
+.contener-newSenha{border: 1px solid gray;
+max-width: 40%;}
+
+.top{background-color: rgba(128, 128, 128, 0.475);
+    padding: 10px 15px;
+}
+
+
+
+.input-box {padding: 15px 15px;
+}
+
+.input-box input{width: 100%;
+    background-color: #ffffff00;
+    border: none;
+     
+    border-bottom: 1px solid #fe9000ce;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    transition-duration: 0.2s;
+    border-radius: 0px;
+}
+
+.btn-att{
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-att input {width: 80%;
+    padding: 15px 15px;
+margin-bottom: 20px;}
+    
+

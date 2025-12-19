@@ -1,0 +1,122 @@
+/*-----------------------------------*\
+  #FORMULÁRIO DE ADMINISTRAÇÃO
+\*-----------------------------------*/
+
+:root {
+  --primary-color: #fb3997; /* Rosa Unipet */
+  --secondary-color: #ed6335; /* Laranja */
+  --text-dark: #333;
+  --text-gray: #666;
+  --bg-body: #f4f7f6;
+  --bg-card: #ffffff;
+  --border-color: #ddd;
+  --radius: 8px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Fundo da Página Admin */
+.admin-main {
+  background-color: var(--bg-body);
+  min-height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centraliza verticalmente */
+  padding: 40px 20px;
+}
+
+/* O Cartão do Formulário */
+.form-card {
+  background-color: var(--bg-card);
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--primary-color);
+}
+
+.form-title {
+  text-align: center;
+  color: var(--text-dark);
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 800;
+}
+
+/* Grupos de Input */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* Estilo dos Campos (Input, Select, Textarea) */
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--text-dark);
+  transition: 0.3s ease;
+  background-color: #fcfcfc;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(251, 57, 151, 0.1); /* Brilho rosa suave */
+}
+
+/* Campo de Arquivo (File) */
+input[type="file"].form-control {
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Botão Salvar */
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-submit:hover {
+  background-color: #d9267c; /* Rosa mais escuro */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(251, 57, 151, 0.3);
+}
+
+/* Link de Cancelar */
+.btn-cancel {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: var(--text-gray);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.btn-cancel:hover { color: var(--text-dark); text-decoration: underline; }
+
+/* Responsivo */
+@media (max-width: 500px) {
+  .form-card { padding: 25px; }
+}

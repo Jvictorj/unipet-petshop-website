@@ -1,0 +1,302 @@
+/*-----------------------------------*\
+  #LOGIN (E Cadastro/Recuperação)
+\*-----------------------------------*/
+
+:root {
+  --portland-orange: rgb(237, 99, 53);
+  --white: #ffffff;
+  /* Ajustei para 0.4 para garantir que o texto branco seja legível */
+  --glass-bg: rgba(0, 0, 0, 0.4); 
+  --shadow-1: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.containermain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../img/fotoslogin/fotobackgroundlogin.png');
+  background-position: center center;
+  min-height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 20px;
+}
+
+/* Cartão de Login (Efeito Vidro) */
+.containerform {
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--glass-bg);
+  border-radius: 20px;
+  backdrop-filter: blur(8px); /* Aumentei o blur para ficar mais elegante */
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  overflow: hidden;
+  min-height: 550px;
+}
+
+/* --- Lado Esquerdo (Logo) --- */
+.containeresqueda {
+  position: relative; /* Necessário para o ::after funcionar */
+  width: 45%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2); /* Leve contraste extra */
+}
+
+/* Linha Vertical Laranja (Divisória) */
+.containeresqueda::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%; 
+  width: 2px;
+  background-color: var(--portland-orange);
+}
+
+.logoimglogin img {
+  max-width: 180px;
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+.logoimglogin img:hover { transform: scale(1.05); }
+
+.mensagemlogin {
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+}
+
+.mensagemlogin p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+/* --- Lado Direito (Formulário) --- */
+.containerdireita {
+  width: 55%;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tiltelogin {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+}
+
+/* Inputs */
+.input-box {
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 15px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.input-box input:focus {
+  border-color: var(--portland-orange);
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Links (Esqueci Senha) */
+.esqueciminhasenha {
+  width: 100%;
+  max-width: 350px;
+  text-align: right;
+  margin-bottom: 25px;
+}
+
+.esqueciminhasenha a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.esqueciminhasenha a:hover {
+  color: var(--portland-orange);
+  text-decoration: underline;
+}
+
+.voltaraohome {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.voltaraohome a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.voltaraohome a:hover { color: white; }
+
+/* Botões */
+.btnentrar {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 350px;
+}
+
+.btnentrar button,
+.btnentrar a {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+/* Botão Entrar (Sólido) */
+.btnentrar button {
+  background-color: var(--portland-orange);
+  color: white;
+  border: none;
+}
+
+.btnentrar button:hover {
+  background-color: #ff4500;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+}
+
+/* Botão Cadastre-se/Voltar (Outline) */
+.btnentrar a {
+  background-color: transparent;
+  border: 1px solid var(--portland-orange);
+  color: var(--portland-orange);
+  display: block; /* Importante para o padding funcionar */
+}
+
+.btnentrar a:hover {
+  background-color: var(--portland-orange);
+  color: white;
+}
+
+/* Notificações (Toasts) */
+#toast, #toast2 {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s, bottom 0.3s;
+  pointer-events: none;
+}
+
+#toast.show, #toast2.show { opacity: 1; bottom: 40px; }
+#toast { background-color: #e74c3c; }
+#toast2 { background-color: #2ecc71; }
+.hidden { display: none; }
+
+/* Link Topo */
+#link-topo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--portland-orange);
+  color: white;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+#link-topo:hover { transform: translateY(-3px); }
+
+/*-----------------------------------*\
+  #RESPONSIVIDADE
+\*-----------------------------------*/
+
+@media screen and (max-width: 900px) {
+  .containerform {
+    flex-direction: column;
+    height: auto;
+    max-width: 500px;
+  }
+
+  .containeresqueda {
+    width: 100%;
+    padding: 30px;
+    /* Removemos a linha vertical e adicionamos uma borda embaixo */
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ESSENCIAL: Esconde o traço vertical laranja no celular */
+  .containeresqueda::after {
+    display: none;
+  }
+
+  .containerdireita {
+    width: 100%;
+    padding: 40px 30px;
+  }
+
+  .mensagemlogin p { font-size: 1.2rem; }
+}
+
+@media screen and (max-width: 480px) {
+  .containermain { padding: 15px; }
+  .containerform { border-radius: 15px; }
+
+  .btnentrar {
+    flex-direction: column;
+  }
+  
+  .input-box input { font-size: 1rem; padding: 12px; }
+}
