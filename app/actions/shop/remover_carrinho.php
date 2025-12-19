@@ -11,5 +11,5 @@ if (isset($_GET['id'])) {
 }
 
 // Volta para o carrinho
-header('Location: ../../public/carrinho.php');
+header('Location: ../../../public/carrinho.php');
 exit;

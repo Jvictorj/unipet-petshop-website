@@ -3,7 +3,7 @@
 session_start();
 
 // Regra 1: Includes com caminho relativo correto
-require_once '../app/includes/functions.php';
+require_once '../../app/includes/functions.php';
 
 // Verificação: Se o usuário já estiver logado, manda pro painel
 if (isset($_SESSION['user_id'])) {
@@ -23,15 +23,15 @@ if (isset($_SESSION['user_id'])) {
   <meta name="description" content="Acesse sua conta na Unipet">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
-  <link rel="shortcut icon" href="../assets/img/favicon/icon-unipet.png" type="image/png">
 
-  <link rel="stylesheet" href="../assets/css/login.css">
-  <link rel="stylesheet" href="../assets/css/modal.css">
-  <link rel="stylesheet" href="../assets/css/menufixo.css">
-  <link rel="stylesheet" href="../assets/css/footer.css">
+  <link rel="shortcut icon" href="../../assets/img/favicon/icon-unipet.png" type="image/png">
 
-  <script src="../assets/js/validacao.js" defer></script>
+  <link rel="stylesheet" href="../../assets/css/login.css">
+  <link rel="stylesheet" href="../../assets/css/modal.css">
+  <link rel="stylesheet" href="../../assets/css/menufixo.css">
+  <link rel="stylesheet" href="../../assets/css/footer.css">
+
+  <script src="../../assets/js/validacao.js" defer></script>
 </head>
 
 <body>
@@ -45,7 +45,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="containeresqueda">
           <div class="logoimglogin"> 
             <a href="index.php">
-              <img src="../assets/img/fotoslogin/unipetdarkmode-removebg-preview.png" alt="imglogo" id="logoimagemdarkmodee">
+              <img src="../../assets/img/fotoslogin/unipetdarkmode-removebg-preview.png" alt="imglogo" id="logoimagemdarkmodee">
             </a>
           </div>
           <div class="mensagemlogin">
@@ -65,7 +65,7 @@ if (isset($_SESSION['user_id'])) {
         }
         ?>
 
-        <form method="post" action="../app/actions/login.php" class="containerdireita">
+        <form method="POST" action="../../app/actions/auth/login.php" class="containerdireita">
           <div class="tiltelogin">
             <p><b>Acesse usando seu Login ou CPF</b></p>
           </div>
@@ -89,7 +89,7 @@ if (isset($_SESSION['user_id'])) {
           </div>
           
           <div class="voltaraohome">
-            <a href="index.php">Voltar ao Início</a>
+            <a href="../public/index.php">Voltar ao Início</a>
           </div>
         </form>
       </div>

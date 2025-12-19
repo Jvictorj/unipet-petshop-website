@@ -18,7 +18,7 @@ require_once '../app/includes/header.php';
 <main>
     <div class="containerbody">
         <div class="title">
-            <h1>Ops!</h1>
+            <h1>Ops! erro 404</h1>
         </div>
         
         <div class="descriptiontitle">
@@ -27,14 +27,13 @@ require_once '../app/includes/header.php';
         </div>
         
         <div class="btncontato">
-            <a href="contato.php">
+            <a href="cliente/area-cliente-contato.php">
                 <button class="btnconosco">Fale Conosco</button>
             </a>
-            <br><br>
-            <a href="index.php" style="text-decoration: none; color: #333;">
-                <i class="bi bi-arrow-left"></i> Voltar para o Início
-            </a>
         </div>
+        <a href="index.php" style="text-decoration: none; color: #2b2a2aff;">
+                <i class="bi bi-arrow-left"></i> Voltar para o Início
+        </a>
     </div>
 </main>
 

@@ -1,43 +1,137 @@
 /*-----------------------------------*\
-  #CONTATO INTERNO
+  #PÁGINA DE CONTATO
 \*-----------------------------------*/
 
-.contenet-contato {
-  padding: 15px 25px;
-  width: 100%;
+:root {
+  --cor-secundaria: rgb(0, 0, 0);
+  --portland-orange: rgb(237, 99, 53);
 }
 
-.contener-inputs {
-  width: 100%;
+.dark-theme {
+  --cor-secundaria: rgb(255, 255, 255);
 }
 
-.inputs {
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--cor-primaria, #fff); /* Ajuste para tema claro */
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 120px auto;
+  padding: 0 4%;
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  border: 1px solid orange;
+  background-color: transparent;
+  max-width: 500px;
+  padding: 40px 50px;
+  border-radius: 20px;
+}
+
+form h1 {
+  text-align: center;
+  font-size: 30px;
+  color: var(--cor-secundaria);
   margin-bottom: 20px;
 }
 
-.inputs label {
-  display: block;
-  font-size: 1.4rem;
-  color: #555;
-  margin-bottom: 5px;
+form p {
+  text-align: center;
+  margin: 20px 0;
+  color: var(--cor-secundaria);
 }
 
-.contener-inputs input {
+.input-single {
+  position: relative;
+  margin: 30px 0;
+  color: var(--cor-secundaria);
+}
+
+.input-single label {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  transition: all 0.3s;
+  cursor: text;
+  color: var(--cor-secundaria);
+  font-size: 16px;
+}
+
+.input {
   width: 100%;
-  background-color: #ffffff00;
+  border: 0;
+  border-bottom: 2px solid #ff8000;
+  padding: 5px;
+  font-size: 17px;
+  outline: 0;
+  color: var(--cor-secundaria);
+  background: transparent;
+}
+
+/* Animação do Label */
+form .input-single .input:focus ~ label,
+form .input-single .input:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 12px;
+  color: #ff8000;
+}
+
+/* Área de Texto (Mensagem) */
+.input-mensagem {
+  height: 100px; /* Aumentei para caber texto */
+  width: 100%;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: var(--cor-secundaria);
+  padding: 10px;
+}
+
+.input-mensagem textarea {
   border: none;
-  border-bottom: 1px solid #fe9000ce;
-  padding: 10px 15px;
-  transition-duration: 0.2s;
-  border-radius: 0px;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: var(--cor-secundaria);
   outline: none;
+  resize: none;
+  font-size: 16px;
+}
+
+#enviar {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#enviar {
+  padding: 10px 40px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #ff7700;
+  color: rgb(150, 12, 12);
+  cursor: pointer;
   font-size: 1.6rem;
+  font-weight: bold;
+  transition: 0.2s;
 }
 
-.contener-inputs input:focus {
-  border-bottom: 2px solid #fe9000;
-}
-
-@media screen and (max-width: 1024px) {
-  .contenet-contato { padding: 0; }
+#enviar:hover {
+  background-color: rgb(250, 154, 45);
 }

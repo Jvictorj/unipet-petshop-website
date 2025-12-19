@@ -1,37 +1,51 @@
 <?php
+// 1. Iniciar sessão
 session_start();
-require_once '../app/includes/functions.php';
-require_once '../app/includes/conexao.php';
+
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// Define que estamos 2 níveis abaixo da raiz (public/cliente/)
+$path = '../../'; 
+
+// 2. Includes (Conexão e Funções)
+require_once $path . 'app/includes/functions.php';
+require_once $path . 'app/config/conexao.php';
 
 // Segurança: Apenas logados
-ensureAuthenticated();
+// Se a função ensureAuthenticated não existir, usa ensureUser ou verificação manual
+if (function_exists('ensureAuthenticated')) {
+    ensureAuthenticated();
+} elseif (function_exists('ensureUser')) {
+    ensureUser();
+} elseif (!isset($_SESSION['user_id'])) {
+    header('Location: ' . $path . 'public/auth/login.php');
+    exit;
+}
 
 $user_id = $_SESSION['user_id'];
 
 // Busca os produtos favoritos do usuário
 try {
-    // Tenta buscar ordenando pela data. 
-    // SE O SEU BANCO NÃO TIVER A COLUNA 'data_adicionado', VAI DAR ERRO AQUI.
-    // Se der erro, apague a parte: "ORDER BY f.data_adicionado DESC"
-    $sql = "SELECT p.*, f.data_adicionado 
+    // SQL Ajustado
+    $sql = "SELECT p.*, f.data_adicionado, f.id as fav_id
             FROM produtos p 
             INNER JOIN favoritos f ON p.id = f.produto_id 
             WHERE f.usuario_id = :uid 
-            ORDER BY f.id DESC"; // Mudei para f.id para garantir compatibilidade
+            ORDER BY f.id DESC";
     
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['uid' => $user_id]);
     $favoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
-    // EXIBE O ERRO REAL PARA VOCÊ CORRIGIR
     die("Erro técnico ao carregar favoritos: <br>" . $e->getMessage());
 }
 
 $pageTitle = "Meus Favoritos | Unipet";
-$pageCss = ['../assets/css/favoritos.css']; 
 
-require_once '../app/includes/header.php';
+// CSS Específico (Corrigido com $path)
+$pageCss = [$path . 'assets/css/favoritos.css']; 
+
+require_once $path . 'app/includes/header.php';
 ?>
 
 <main>
@@ -58,11 +72,11 @@ require_once '../app/includes/header.php';
                 ?>
                     <div class="card-fav">
                         <div class="img-area">
-                            <a href="produto.php?id=<?php echo $prod['id']; ?>">
-                                <img src="../assets/img/produtos/<?php echo $capa; ?>" alt="<?php echo $prod['nome']; ?>">
+                            <a href="../produto.php?id=<?php echo $prod['id']; ?>">
+                                <img src="<?php echo $path; ?>assets/img/produtos/<?php echo $capa; ?>" alt="<?php echo $prod['nome']; ?>">
                             </a>
                             
-                            <a href="../app/actions/favoritar.php?id=<?php echo $prod['id']; ?>&origem=lista" 
+                            <a href="<?php echo $path; ?>app/actions/shop/favoritar.php?id=<?php echo $prod['id']; ?>&origem=lista" 
                                class="btn-remove" 
                                title="Remover dos favoritos">
                                 <i class="bi bi-x-lg"></i>
@@ -71,7 +85,8 @@ require_once '../app/includes/header.php';
                         <div class="info-area">
                             <h3><?php echo $prod['nome']; ?></h3>
                             <p class="preco">R$ <?php echo number_format($prod['preco'], 2, ',', '.'); ?></p>
-                            <a href="produto.php?id=<?php echo $prod['id']; ?>" class="btn-ver">Ver Produto</a>
+                            
+                            <a href="../produto.php?id=<?php echo $prod['id']; ?>" class="btn-ver">Ver Produto</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -80,10 +95,10 @@ require_once '../app/includes/header.php';
             <div class="vazio-fav">
                 <i class="bi bi-heart-break" style="font-size: 3rem; color: #ccc;"></i>
                 <h3 style="color: #666; margin-top: 15px;">Você ainda não tem favoritos.</h3>
-                <a href="categoria.php?tipo=Todos" style="display:inline-block; margin-top:15px; color: #fb3997; font-weight: bold;">Explorar Loja</a>
+                <a href="../categoria.php?tipo=Todos" style="display:inline-block; margin-top:15px; color: #fb3997; font-weight: bold;">Explorar Loja</a>
             </div>
         <?php endif; ?>
     </section>
 </main>
 
-<?php require_once '../app/includes/footer.php'; ?>
+<?php require_once $path . 'app/includes/footer.php'; ?>

@@ -1,11 +1,16 @@
 <?php
 // 1. Configuração Inicial
 session_start();
-require_once '../app/includes/functions.php';
-require_once '../app/includes/conexao.php';
+
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// O arquivo está em public/categoria.php, então sobe um nível para a raiz
+$path = '../'; 
+
+// Regra 1: Includes (Conexão e Funções) corrigidos com $path
+require_once $path . 'app/includes/functions.php';
+require_once $path . 'app/config/conexao.php';
 
 // 2. Filtros
-// Limpa os dados de entrada
 $tipo = isset($_GET['tipo']) ? ucfirst(trim($_GET['tipo'])) : 'Todos';
 $busca = isset($_GET['busca']) ? trim($_GET['busca']) : ''; 
 
@@ -16,72 +21,53 @@ $tituloPagina = "Todos os Produtos";
 // 3. Lógica de Busca no Banco de Dados
 try {
     $params = [];
-    $sql = "SELECT * FROM produtos WHERE 1=1"; // Base da query
+    $sql = "SELECT * FROM produtos WHERE 1=1"; 
 
-    // --- CENÁRIO 1: BUSCA POR PALAVRA CHAVE ---
     if (!empty($busca)) {
         $tituloPagina = "Resultados para: " . htmlspecialchars($busca);
-        
-        // 1. Explode: Separa as palavras
-        // 2. Filter: Remove espaços vazios
-        // 3. Values: REORGANIZA os índices (0, 1, 2...) <- CORREÇÃO DO ERRO
         $termos = array_values(array_filter(explode(' ', $busca)));
 
         if (count($termos) > 0) {
             $sql .= " AND (";
-
             foreach ($termos as $index => $termo) {
-                if ($index > 0) {
-                    $sql .= " AND ";
-                }
-
+                if ($index > 0) $sql .= " AND ";
                 $phNome = ":nome{$index}";
                 $phDesc = ":desc{$index}";
-
                 $sql .= "(nome LIKE $phNome OR descricao_curta LIKE $phDesc)";
-
                 $params["nome{$index}"] = "%{$termo}%";
                 $params["desc{$index}"] = "%{$termo}%";
             }
-
-    $sql .= ")";
-}
-
+            $sql .= ")";
+        }
     } 
-    // --- CENÁRIO 2: FILTRO POR CATEGORIA ---
     elseif ($tipo !== 'Todos') {
         $sql .= " AND categoria = :cat";
-        $params['cat'] = $tipo; // Chave sem ':' para evitar bugs de versão PDO
+        $params['cat'] = $tipo;
         $tituloPagina = $tipo;
-        
-        // Define banner dinâmico
         $bannerImg = strtolower($tipo) . ".png"; 
     }
-    // --- CENÁRIO 3: MOSTRAR TUDO (Já está no padrão) ---
 
-    // Executa a consulta
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
-    // Em caso de erro, mostre a mensagem técnica (apenas para debug)
     die("Erro no Banco de Dados: " . $e->getMessage());
 }
 
 // 4. Configuração do Header
 $pageTitle = "Unipet - " . $tituloPagina;
-$pageCss = ['../assets/css/paginacategoria.css'];
+$pageCss = [$path . 'assets/css/paginacategoria.css'];
 
-require_once '../app/includes/header.php';
+require_once $path . 'app/includes/header.php';
 ?>
 
 <section class="banner">
     <div class="banner-content">
         <div class="banner-box">
-            <img class="img-desktop" src="../assets/img/banneracategoria/<?php echo $bannerImg; ?>" 
+            <img class="img-desktop" src="<?php echo $path; ?>assets/img/banneracategoria/<?php echo $bannerImg; ?>" 
                  alt="Banner <?php echo $tituloPagina; ?>"
-                 onerror="this.src='../assets/img/banneracategoria/todososprodutosbanner.png';">
+                 onerror="this.src='<?php echo $path; ?>assets/img/banneracategoria/todososprodutosbanner.png';">
         </div>
     </div>
 </section>
@@ -99,7 +85,6 @@ require_once '../app/includes/header.php';
                     <?php foreach ($produtos as $prod): ?>
                         
                         <?php 
-                            // Tratamento de Imagem para a Vitrine (Pega a primeira da lista)
                             $img_str = $prod['imagem_principal'];
                             $capa = "sem-foto.png";
 
@@ -117,7 +102,7 @@ require_once '../app/includes/header.php';
                             <div class="card-produto">
                                 <div class="card-banner img-holder">
                                     <a href="produto.php?id=<?php echo $prod['id']; ?>">
-                                        <img src="../assets/img/produtos/<?php echo $capa; ?>" 
+                                        <img src="<?php echo $path; ?>assets/img/produtos/<?php echo $capa; ?>" 
                                              alt="<?php echo $prod['nome']; ?>" 
                                              class="img-cover default">
                                     </a>
@@ -157,4 +142,4 @@ require_once '../app/includes/header.php';
     </section>
 </main>
 
-<?php require_once '../app/includes/footer.php'; ?>
+<?php require_once $path . 'app/includes/footer.php'; ?>

@@ -1,26 +1,50 @@
 <?php
-// Regra 2: Iniciar sessão
+// 1. Iniciar sessão
 session_start();
 
-// Regra 1: Includes
-require_once '../app/includes/functions.php';
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// Define que estamos 2 níveis abaixo da raiz (public/cliente/)
+$path = '../../'; 
+
+// 2. Includes (Conexão e Funções)
+require_once $path . 'app/config/conexao.php'; // Necessário para usar $pdo
+require_once $path . 'app/includes/functions.php';
 
 // Segurança: Apenas logados
-ensureUser();
+// Se a função ensureUser não existir, use if(!isset($_SESSION['user_id']))...
+if (function_exists('ensureUser')) {
+    ensureUser();
+} elseif (!isset($_SESSION['user_id'])) {
+    header('Location: ' . $path . 'public/auth/login.php');
+    exit;
+}
 
 $pageTitle = "Meus Pedidos - Área do Cliente";
 
-// CSS Específico desta página
-// Certifique-se de mover seus CSS antigos para assets/css/areacliente/
+// CSS Específico (Caminhos corrigidos baseados no seu Tree)
 $pageCss = [
-    '../assets/css/areas/cliente/clientestyle.css',
-    '../assets/css/areas/cliente/meuspedidos.css' // Verifique se o nome do arquivo CSS está correto
+    $path . 'assets/css/cliente/clientestyle.css',
+    $path . 'assets/css/cliente/meuspedidos.css'
 ];
 
-require_once '../app/includes/header.php';
+require_once $path . 'app/includes/header.php';
 
 // Captura nome do usuário da sessão
 $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
+
+// --- LÓGICA PARA BUSCAR PEDIDOS (Exemplo Básico) ---
+$pedidos = [];
+// Descomente e ajuste quando tiver a tabela de pedidos
+/*
+try {
+    $sql = "SELECT * FROM pedidos WHERE usuario_id = :uid ORDER BY data_pedido DESC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['uid' => $_SESSION['user_id']]);
+    $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // Erro silencioso ou log
+}
+*/
 ?>
 
 <main>
@@ -30,7 +54,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
             <span>
                 Olá, <b><?php echo htmlspecialchars($nomeUsuario); ?></b>! Acompanhe aqui seus pedidos e seus dados cadastrais.
             </span>
-            <a href="index.php">
+            <a href="../index.php">
                 <button style="padding: 10px; cursor: pointer;">Voltar para a loja</button>
             </a>
         </div>
@@ -49,7 +73,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
                         </a>
                     </li>
                     <li class="lista_func">
-                        <a href="atualizar-senha.php">
+                        <a href="../auth/atualizar-senha.php">
                             <i class="bi bi-arrow-clockwise"></i> <span>Alterar senha</span>
                         </a>
                     </li>
@@ -92,7 +116,17 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
                     <br/>
 
                     <div class="respota-pedido">
-                        <span>Nenhum pedido encontrado.</span>
+                        <?php if (count($pedidos) > 0): ?>
+                            <?php foreach($pedidos as $pedido): ?>
+                                <div class="item-pedido" style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee;">
+                                    <span>#<?php echo $pedido['id']; ?></span>
+                                    <span>R$ <?php echo number_format($pedido['valor_total'], 2, ',', '.'); ?></span>
+                                    <span><?php echo $pedido['status']; ?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <span>Nenhum pedido encontrado.</span>
+                        <?php endif; ?>
                     </div>
                     
                     </div>
@@ -103,5 +137,5 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
 
 <?php
 // Inclusão do Rodapé
-require_once '../app/includes/footer.php';
+require_once $path . 'app/includes/footer.php';
 ?>

@@ -3,7 +3,7 @@
 session_start();
 
 // Regra 1: Includes
-require_once '../app/includes/functions.php';
+require_once '../../app/includes/functions.php';
 
 // Se já estiver logado, não precisa recuperar senha
 if (isset($_SESSION['user_id'])) {
@@ -24,12 +24,12 @@ if (isset($_SESSION['user_id'])) {
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <link rel="shortcut icon" href="../assets/img/favicon/icon-unipet.png" type="image/png">
+  <link rel="shortcut icon" href="../../assets/img/favicon/icon-unipet.png" type="image/png">
 
-  <link rel="stylesheet" href="../assets/css/login.css">
-  <link rel="stylesheet" href="../assets/css/modal.css">
-  <link rel="stylesheet" href="../assets/css/menufixo.css">
-  <link rel="stylesheet" href="../assets/css/footer.css">
+  <link rel="stylesheet" href="../../assets/css/login.css">
+  <link rel="stylesheet" href="../../assets/css/modal.css">
+  <link rel="stylesheet" href="../../assets/css/menufixo.css">
+  <link rel="stylesheet" href="../../assets/css/footer.css">
 
   <script src="../assets/js/slide.js" defer></script>
   <script src="../assets/js/modal.js" defer></script>
@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
           <div class="containeresqueda">
               <div class="logoimglogin"> 
                   <a href="index.php">
-                    <img src="../assets/img/fotoslogin/unipetdarkmode-removebg-preview.png" alt="logo unipet" id="logoimagemdarkmodee">
+                    <img src="../../assets/img/fotoslogin/unipetdarkmode-removebg-preview.png" alt="logo unipet" id="logoimagemdarkmodee">
                   </a>
               </div>
               <div class="mensagemlogin">

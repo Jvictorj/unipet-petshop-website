@@ -1,33 +1,34 @@
 <?php
 session_start();
 
-// Tenta carregar a conexão ajustando o caminho caso necessário
-if (file_exists('../includes/conexao.php')) {
-    require_once '../includes/conexao.php';
-} elseif (file_exists('../../app/includes/conexao.php')) {
-    require_once '../../app/includes/conexao.php';
+// 1. Conexão com o Banco (Caminho absoluto via __DIR__ para evitar erros)
+// Localização atual: app/actions/shop/favoritar.php
+$caminhoConexao = __DIR__ . '/../../config/conexao.php';
+
+if (file_exists($caminhoConexao)) {
+    require_once $caminhoConexao;
 } else {
-    die("Erro: Arquivo de conexão não encontrado em app/actions/favoritar.php");
+    die("Erro: Arquivo de conexão não encontrado em: " . $caminhoConexao);
 }
 
-// Verifica login
+// 2. Verifica se o usuário está logado
 if (!isset($_SESSION['user_id'])) {
-    // Salva a página atual para voltar depois do login (opcional)
-    header('Location: ../../public/login.php');
+    // Redireciona para a tela de login (Sobe 3 níveis para a raiz e entra em public/auth)
+    header('Location: ../../../public/auth/login.php');
     exit;
 }
 
 if (!isset($_GET['id'])) {
-    header('Location: ../../public/index.php');
+    header('Location: ../../../public/index.php');
     exit;
 }
 
 $userId = $_SESSION['user_id'];
 $prodId = (int)$_GET['id'];
-$origem = isset($_GET['origem']) ? $_GET['origem'] : 'produto'; // Define de onde veio o clique
+$origem = isset($_GET['origem']) ? $_GET['origem'] : 'produto'; 
 
 try {
-    // 1. Verifica se já é favorito
+    // Verifica se já é favorito
     $stmt = $pdo->prepare("SELECT id FROM favoritos WHERE usuario_id = :uid AND produto_id = :pid");
     $stmt->execute(['uid' => $userId, 'pid' => $prodId]);
 
@@ -37,23 +38,21 @@ try {
         $del->execute(['uid' => $userId, 'pid' => $prodId]);
     } else {
         // ADICIONAR (Favoritar)
-        // Se der erro de coluna 'data_adicionado' não encontrada, remova ela do Insert se for automático no banco
         $ins = $pdo->prepare("INSERT INTO favoritos (usuario_id, produto_id) VALUES (:uid, :pid)");
         $ins->execute(['uid' => $userId, 'pid' => $prodId]);
     }
 
 } catch (PDOException $e) {
-    // Se der erro, volta para a página anterior com erro (opcional) or die
     die("Erro ao processar favorito: " . $e->getMessage());
 }
 
-// 2. Redirecionamento Inteligente
+// 3. Redirecionamento Inteligente (Caminhos de URL)
 if ($origem === 'lista') {
-    // Se veio da página Meus Favoritos, volta para lá
-    header("Location: ../../public/meus-favoritos.php");
+    // Se veio da página Meus Favoritos (public/cliente/meus-favoritos.php)
+    header("Location: ../../../public/cliente/meus-favoritos.php");
 } else {
-    // Se veio da página do Produto, volta para o produto
-    header("Location: ../../public/produto.php?id=$prodId");
+    // Se veio da página do Produto (public/produto.php)
+    header("Location: ../../../public/produto.php?id=$prodId");
 }
 exit;
 ?>

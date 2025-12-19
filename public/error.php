@@ -2,21 +2,24 @@
 // Regra 2: Iniciar sessão
 session_start();
 
-// Regra 1: Includes com caminho relativo correto
-require_once '../app/includes/functions.php';
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// O arquivo está em public/error.php, então sobe um nível para a raiz
+$path = '../'; 
 
-// Captura a mensagem de erro da URL (se existir), senão usa uma padrão
-// Exemplo de uso: header("Location: error.php?msg=Senha incorreta");
+// Regra 1: Includes com caminho relativo correto usando $path
+require_once $path . 'app/includes/functions.php';
+
+// Captura a mensagem de erro da URL (se existir)
 $mensagemErro = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : 'Ocorreu um erro inesperado no sistema.';
 
 // Configuração da Página
 $pageTitle = "Unipet - Erro";
 
-// Reutilizamos o CSS da página de erro (404) pois o layout é o mesmo
-$pageCss = ['../assets/css/error.css'];
+// CSS Específico usando $path
+$pageCss = [$path . 'assets/css/error.css'];
 
 // Inclusão do Cabeçalho
-require_once '../app/includes/header.php';
+require_once $path . 'app/includes/header.php';
 ?>
 
 <main>
@@ -36,18 +39,17 @@ require_once '../app/includes/header.php';
         </div>
         
         <div class="btncontato">
-            <a href="contato.php">
+            <a href="cliente/area-cliente-contato.php">
                 <button class="btnconosco">Fale Conosco</button>
             </a>
-            <br><br>
-            <a href="index.php" style="text-decoration: none; color: #333;">
-                <i class="bi bi-arrow-left"></i> Voltar para o Início
-            </a>
         </div>
+        <a href="index.php" style="text-decoration: none; color: #2b2a2aff;">
+                <i class="bi bi-arrow-left"></i> Voltar para o Início
+        </a>
     </div>
 </main>
 
 <?php
-// Inclusão do Rodapé
-require_once '../app/includes/footer.php';
+// Inclusão do Rodapé usando $path
+require_once $path . 'app/includes/footer.php';
 ?>

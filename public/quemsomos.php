@@ -42,7 +42,7 @@ require_once '../app/includes/header.php';
         </div>
         
         <div class="videodescription">
-            <video class="videosrc" src="../Video/quemsomos/O Ninho tá On _ Boas-vindas aos alunos _ UNISUAM.mp4" autoplay muted loop></video>
+            <video class="videosrc" src="../videos/quemsomos/O Ninho tá On _ Boas-vindas aos alunos _ UNISUAM.mp4" autoplay muted loop></video>
         </div>
     </div>
 
@@ -79,7 +79,7 @@ require_once '../app/includes/header.php';
             </div>
         </div>
         <div class="videodescription">
-            <video class="videosrc" src="../Video/quemsomos/O Ninho tá On _ Volta às Aulas e boas-vindas aos calouros e veteranos _ UNISUAM.mp4" autoplay muted loop></video>
+            <video class="videosrc" src="../videos/quemsomos/O Ninho tá On _ Volta às Aulas e boas-vindas aos calouros e veteranos _ UNISUAM.mp4" autoplay muted loop></video>
         </div>
     </div>
 </section>

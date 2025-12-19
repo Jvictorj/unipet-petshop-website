@@ -2,8 +2,8 @@
 session_start();
 
 // 1. Includes corretos
-require_once __DIR__ . '/../includes/conexao.php';
-require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../../config/conexao.php';
+require_once __DIR__ . '/../../includes/functions.php';
 
 $errors = [];
 
@@ -60,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tenta registrar usando a conexão PDO ($pdo)
         if (registerUser($pdo, $userData)) {
             // Sucesso: Manda para o login com mensagem (opcional via GET ou Session)
-            header('Location: ../../public/login.php');
+           header('Location: /projeto-unisuam-main/public/auth/login.php');
+
             exit;
         } else {
             $errors[] = 'Erro ao registrar. Verifique se o CPF, Login ou E-mail já existem.';
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
     // Redireciona para o arquivo na pasta public
-    header('Location: ../../public/cadastre-se.php');
+    header('Location: ../../public/auth/register.php');
     exit;
 }
 ?>

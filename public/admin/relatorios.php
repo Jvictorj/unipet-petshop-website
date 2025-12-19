@@ -1,11 +1,27 @@
 <?php
+// Regra 2: Iniciar sessão
 session_start();
-require_once '../app/includes/conexao.php';
-require_once '../app/includes/functions.php';
-ensureAuthenticated();
 
-if ($_SESSION['user_nivel_acesso'] !== 'master') { header('Location: painel.php'); exit; }
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// O arquivo está em public/admin/, então sobe dois níveis para a raiz
+$path = '../../'; 
 
+// Regra 1: Includes (Conexão e Funções) usando $path
+require_once $path . 'app/config/conexao.php'; 
+require_once $path . 'app/includes/functions.php';
+
+// Segurança: Apenas logados
+if (function_exists('ensureAuthenticated')) {
+    ensureAuthenticated();
+}
+
+// Verificação de Nível Master
+if ($_SESSION['user_nivel_acesso'] !== 'master') { 
+    header('Location: ../cliente/painel.php'); 
+    exit; 
+}
+
+// Busca os logs (Query mantida)
 $logs = $pdo->query("
     SELECT l.*, u.nome_completo 
     FROM logs_sistema l 
@@ -14,11 +30,13 @@ $logs = $pdo->query("
 ")->fetchAll();
 
 $pageTitle = "Logs do Sistema - Unipet";
-$pageCss = ['../assets/css/master-style.css']; // CSS Novo
-require_once '../app/includes/header.php';
+
+// CSS Específico (Caminho corrigido para assets/css/admin/ conforme seu tree)
+$pageCss = [$path . 'assets/css/admin/master-style.css']; 
+
+// Include do Cabeçalho
+require_once $path . 'app/includes/header.php';
 ?>
-
-
 
 <main class="master-main">
     <div class="master-container">
@@ -48,15 +66,15 @@ require_once '../app/includes/header.php';
                                 <i class="bi bi-clock"></i> <?= date('d/m/Y H:i', strtotime($log['data_hora'])) ?>
                             </td>
                             <td>
-                                <b><?= $log['nome_completo'] ?? 'Visitante/Sistema' ?></b><br>
+                                <b><?= htmlspecialchars($log['nome_completo'] ?? 'Visitante/Sistema') ?></b><br>
                                 <small style="color: #888;">ID: <?= $log['usuario_id'] ?? 'N/A' ?></small>
                             </td>
                             <td>
                                 <span style="font-weight: bold; color: #fb3997;">
-                                    <?= $log['acao'] ?>
+                                    <?= htmlspecialchars($log['acao']) ?>
                                 </span>
                             </td>
-                            <td style="color: #666;"><?= $log['descricao'] ?></td>
+                            <td style="color: #666;"><?= htmlspecialchars($log['descricao']) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -74,4 +92,7 @@ require_once '../app/includes/header.php';
     </div>
 </main>
 
-<?php require_once '../app/includes/footer.php'; ?>
+<?php 
+// Inclusão do Rodapé usando $path
+require_once $path . 'app/includes/footer.php'; 
+?>

@@ -3,15 +3,7 @@
 session_start();
 
 // Regra 1: Includes com caminho relativo correto
-require_once '../app/config/includes/functions.php';
-
-// Lógica de Autenticação (Preservada do seu código original)
-startSessionIfNotStarted();
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
-$user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Usuário';
+require_once '../app/includes/functions.php';
 
 // Configuração da Página
 $pageTitle = "Unipet: Apaixonado por Animais";

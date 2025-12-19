@@ -1,25 +1,35 @@
 <?php
-// Regra 2: Iniciar sessão
+// 1. Iniciar sessão
 session_start();
 
-// Regra 1: Includes
-require_once '../app/includes/functions.php';
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// Define que estamos 2 níveis abaixo da raiz (public/cliente/)
+$path = '../../'; 
 
-// Segurança: Apenas clientes logados
-ensureUser();
+// 2. Includes (Funções)
+require_once $path . 'app/includes/functions.php';
+
+// 3. Segurança: Apenas clientes logados
+// Se a função ensureUser não existir, faz a checagem manual
+if (function_exists('ensureUser')) {
+    ensureUser();
+} elseif (!isset($_SESSION['user_id'])) {
+    header('Location: ' . $path . 'public/auth/login.php');
+    exit;
+}
 
 $pageTitle = "Fale Conosco - Área do Cliente";
 
-// CSS Específico desta página
-// Certifique-se de mover seus arquivos CSS antigos para a pasta assets/css/areacliente/
+// 4. CSS Específico desta página
+// Caminhos corrigidos baseados no seu Tree (assets/css/cliente/...)
 $pageCss = [
-    '../assets/css/areas/cliente/clientestyle.css',
-    '../assets/css/areas/cliente/contato.css'
+    $path . 'assets/css/cliente/clientestyle.css',
+    $path . 'assets/css/cliente/contato.css'
 ];
 
-require_once '../app/includes/header.php';
+require_once $path . 'app/includes/header.php';
 
-// Captura nome do usuário da sessão para exibir na saudação
+// Captura nome do usuário da sessão
 $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
 ?>
 
@@ -30,8 +40,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
             <span>
                 Olá, <b><?php echo htmlspecialchars($nomeUsuario); ?></b>! Aqui você tem atendimento prioritário.
             </span>
-            <a href="index.php">
-                <button style="padding: 10px; cursor: pointer;">Voltar para a loja</button>
+            <a href="index.php"> <button style="padding: 10px; cursor: pointer;">Voltar para a loja</button>
             </a>
         </div>
 
@@ -49,7 +58,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
                         </a>
                     </li>
                     <li class="lista_func">
-                        <a href="atualizar-senha.php">
+                        <a href="../auth/atualizar-senha.php">
                             <i class="bi bi-arrow-clockwise"></i> <span>Alterar senha</span>
                         </a>
                     </li>
@@ -67,7 +76,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
             </div>
 
             <div class="contenet-contato">
-                <form action="../app/actions/envia.php" method="POST">
+                <form action="<?php echo $path; ?>app/actions/envia.php" method="POST">
                     <div class="contener-inputs">
                         
                         <div class="inputs">
@@ -77,7 +86,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
 
                         <div class="inputs">
                             <label for="email">E-mail</label>
-                            <input type="email" name="email" required placeholder="Seu e-mail de contato">
+                            <input type="email" name="email" value="<?php echo $_SESSION['user_email'] ?? ''; ?>" required placeholder="Seu e-mail de contato">
                         </div>
 
                         <div class="inputs">
@@ -91,7 +100,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
                         </div>
 
                         <div class="inputs">
-                            <button type="submit" style="background-color: #fb3997; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
+                            <button id="enviar" type="submit" style="background-color: #f36f22ff; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
                                 Enviar Mensagem
                             </button>
                         </div>
@@ -105,5 +114,5 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
 
 <?php
 // Inclusão do Rodapé
-require_once '../app/includes/footer.php';
+require_once $path . 'app/includes/footer.php';
 ?>
