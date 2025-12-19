@@ -1,3 +1,11 @@
 RewriteEngine On
+
+# 1. Se o usuário digitar apenas o domínio, manda para public/index.php
 RewriteRule ^$ public/index.php [L]
-RewriteRule (.*) public/$1 [L]
+
+# 2. Se o arquivo ou diretório NÃO existir na raiz (como assets ou app)...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...e se o caminho ainda não começar com /public/, redireciona internamente
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
