@@ -1,75 +1,109 @@
 # 🚀 Roadmap de Atualizações e Correções (UPDATE.md)
 
-Este documento rastreia as tarefas necessárias para estabilizar o sistema após a grande refatoração de pastas (MVC) e lista melhorias futuras.
+Este documento acompanha as **tarefas necessárias para estabilizar o sistema** após a grande refatoração para o padrão **MVC**, além de listar **melhorias futuras e backlog**.
 
 ---
 
-## 🚨 Prioridade Alta: Correção de Caminhos (Pós-Refatoração)
-*Tarefas obrigatórias para que o site volte a funcionar nas novas pastas.*
+## 🚨 Prioridade Alta — Correção de Caminhos (Pós-Refatoração)
 
-### 1. Atualizar Includes do PHP (`require_once`)
-Os arquivos movidos para subpastas agora precisam subir **dois níveis** (`../../`) para achar a pasta `app`.
-
-- [ ] **Auth (`public/auth/`):**
-    - [ ] `login.php`
-    - [ ] `register.php`
-    - [ ] `esqueciasenha.php`
-    - [ ] `atualizar-senha.php`
-    - [ ] `2fa.php`
-- [ ] **Admin (`public/admin/`):**
-    - [ ] `admin-produtos.php`
-    - [ ] `admin-produto-form.php`
-    - [ ] `admin-pedidos.php`
-    - [ ] `master-usuarios.php`
-    - [ ] `relatorios.php`
-- [ ] **Cliente (`public/cliente/`):**
-    - [ ] `painel.php`
-    - [ ] `meus-pedidos.php`
-    - [ ] `dados-pessoais.php`
-    - [ ] `carrinho.php`
-
-### 2. Atualizar Links de Formulários (`action="..."`)
-Os formulários HTML ainda apontam para os caminhos antigos.
-*Exemplo:* De `action="../app/acao/login.php"` para `action="../../app/actions/auth/login.php"`.
-
-- [ ] Corrigir form no `login.php`
-- [ ] Corrigir form no `register.php`
-- [ ] Corrigir form no `admin-produto-form.php` (Salvar produto)
-- [ ] Corrigir links de "Excluir" e "Adicionar ao Carrinho"
-
-### 3. Atualizar Links de CSS e JS
-Garantir que a variável `$path` esteja sendo usada ou que os caminhos fixos estejam corretos.
-
-- [ ] Verificar se o `header.php` está carregando o CSS corretamente em todas as subpastas.
-- [ ] Verificar se as imagens (`<img src="...">`) dentro da pasta `admin` e `cliente` estão carregando.
+> Tarefas **obrigatórias** para que o sistema volte a funcionar corretamente após a mudança de estrutura de pastas.
 
 ---
 
-## 🧹 Melhorias de Código (Refactor)
+## 🛒 Prioridade Atual — Finalização do Fluxo de Compra
 
-- [ ] **Padronizar nome da pasta de ações:**
-    - Atualmente existem referências a `app/acao` e `app/actions`.
-    - **Meta:** Mover tudo para `app/actions` e atualizar os links.
-- [ ] **Remover CSS inline:**
-    - Identificar arquivos PHP que ainda têm `<style>` ou `style="..."` e mover para os arquivos `.css` correspondentes em `assets/css`.
-- [ ] **Limpeza de Imagens:**
-    - Organizar a pasta `assets/img` removendo duplicatas ou imagens de teste que não são usadas no layout final.
+> Transformar o carrinho em um **pedido real salvo no banco de dados**.
 
----
+### 1️⃣ Estrutura do Banco de Dados
 
-## ✨ Funcionalidades Futuras (Backlog)
+* [ ] Criar tabela `pedidos`
 
-### Funcionalidades
-- [ ] **Upload de Imagens Real:** Fazer o formulário de produtos salvar a imagem na pasta `assets/img/uploads` e gravar apenas o nome no banco.
-- [ ] **Sistema de Pagamento:** Integrar com uma API real (Mercado Pago ou Stripe) no lugar do botão "Finalizar Compra" atual.
-- [ ] **Recuperação de Senha Real:** Implementar o envio de e-mail com PHPMailer na lógica de `esqueciasenha.php`.
+  * `id`, `usuario_id`, `total`, `status`, `data`, `metodo_pagamento`
+* [ ] Criar tabela `itens_pedido`
 
-### Segurança
-- [ ] **Proteger Uploads:** Validar se o arquivo enviado é realmente uma imagem (JPG/PNG).
-- [ ] **Sessão:** Implementar timeout de sessão (deslogar automaticamente após 30min de inatividade).
+  * `id`, `pedido_id`, `produto_id`, `quantidade`, `preco_unitario`
 
 ---
 
-## 📝 Histórico de Atualizações Recentes
+### 2️⃣ Página de Checkout (`public/checkout.php`)
 
-- **[DATA ATUAL]** - 🏗️ **Refactor:** Reestruturação completa do projeto para padrão MVC. Separação de pastas em `app` (backend), `public` (frontend) e `assets` (estáticos). Criação de branch `refactor/nova-estrutura`.
+* [ ] Confirmação de endereço
+* [ ] Resumo final (produtos + frete fictício)
+* [ ] Botão **Confirmar Pedido**
+
+---
+
+### 3️⃣ Processamento do Pedido
+
+`app/actions/shop/finalizar_pedido.php`
+
+* [ ] Salvar pedido na tabela `pedidos`
+* [ ] Salvar itens do carrinho em `itens_pedido`
+* [ ] Limpar `$_SESSION['carrinho']` após sucesso
+
+---
+
+## 🛠️ Melhorias Administrativas (Admin & Master)
+
+* [ ] **Dashboard com Gráficos**
+
+  * Implementar Chart.js no `public/admin/painel.php`
+  * Pedidos do dia, faturamento e produtos mais vendidos
+
+* [ ] **Gestão de Estoque**
+
+  * Adicionar campo `estoque` na tabela `produtos`
+  * Bloquear compra quando estoque for zero
+
+* [ ] **Upload de Imagens**
+
+  * Salvar arquivos em `assets/img/produtos`
+  * Gravar apenas o nome no banco
+
+---
+
+## ✨ Experiência do Usuário (Backlog)
+
+* [ ] Filtros avançados (preço, marca, categoria)
+* [ ] Sistema de avaliação (estrelas + comentários)
+* [ ] E-mails automáticos de pedido (PHPMailer)
+* [ ] Recuperação de senha real por e-mail
+
+---
+
+## 🔒 Segurança
+
+* [ ] Validar upload de imagens (JPG/PNG)
+* [ ] Timeout de sessão (30 minutos)
+* [ ] Proteção contra compras sem estoque
+
+---
+
+## ✅ Concluído — Fase de Estabilização
+
+* [x] Refatoração completa para padrão MVC
+* [x] Padronização de caminhos com variável `$path`
+* [x] Home pública (`index.php`)
+* [x] Organização das actions (`auth` e `shop`)
+* [x] Carrinho com AJAX (quantidade dinâmica)
+* [x] Segurança Master (logs e cargos)
+
+---
+
+## 📝 Histórico de Versões
+
+* **v1.1.0** — Refatoração MVC, organização de pastas e caminhos dinâmicos
+* **v1.0.0** — Lançamento inicial (login, cadastro e vitrine)
+
+---
+
+## 📝 Atualizações Recentes
+
+* **[DATA ATUAL]** 🏗️ **Refactor**
+
+  * Reestruturação completa do projeto
+  * Separação em `app`, `public` e `assets`
+  * Criação da branch `refactor/nova-estrutura`
+
+
+
