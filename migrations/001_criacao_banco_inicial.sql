@@ -1,3 +1,5 @@
+-- Arquivo: db_versions/001_criacao_banco_inicial.sql
+
 -- 1. Criação do Banco de Dados
 CREATE DATABASE IF NOT EXISTS unipet CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE unipet;
@@ -18,7 +20,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     senha_hash VARCHAR(255) NOT NULL,
     nivel_acesso ENUM('cliente','admin','master') NOT NULL DEFAULT 'cliente',
     attempts INT NOT NULL DEFAULT 0,
-    codigo_2fa VARCHAR(6) DEFAULT NULL, -- Campo necessário para o Login 2FA
+    codigo_2fa VARCHAR(6) DEFAULT NULL,
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -29,13 +31,13 @@ CREATE TABLE IF NOT EXISTS produtos (
     descricao_curta TEXT,
     descricao_longa TEXT,
     preco DECIMAL(10, 2),
-    imagem_principal VARCHAR(255), -- Ex: 'cachorro/1.png'
-    categoria VARCHAR(50),         -- Ex: 'Cachorro', 'Gato'
+    imagem_principal VARCHAR(255),
+    categoria VARCHAR(50),        
     spec_idade VARCHAR(50),        
     spec_linha VARCHAR(50),
     spec_pet VARCHAR(50),
     spec_porte VARCHAR(50),
-    estoque INT DEFAULT 100        -- Controle de estoque básico
+    estoque INT DEFAULT 100
 );
 
 -- 4. Tabela de Favoritos
@@ -44,32 +46,32 @@ CREATE TABLE IF NOT EXISTS favoritos (
     usuario_id INT NOT NULL,
     produto_id INT NOT NULL,
     data_adicionado DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(usuario_id, produto_id), -- Impede duplicidade
+    UNIQUE(usuario_id, produto_id), 
     FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE,
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
 );
 
--- 5. Tabela de Logs do Sistema (Para segurança e auditoria)
+-- 5. Tabela de Logs do Sistema
 CREATE TABLE IF NOT EXISTS logs_sistema (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT,
-    acao VARCHAR(50), -- Ex: 'LOGIN', 'ERRO_LOGIN', 'CADASTRO'
+    acao VARCHAR(50),
     descricao TEXT,
     ip_usuario VARCHAR(45),
     data_hora DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- 6. Tabela de Mensagens de Contato (Para o Admin ver)
+-- 6. Tabela de Mensagens de Contato
 CREATE TABLE IF NOT EXISTS contatos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
     email VARCHAR(150),
     mensagem TEXT,
-    lida TINYINT(1) DEFAULT 0, -- 0 = Não lida, 1 = Lida
+    lida TINYINT(1) DEFAULT 0,
     data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- 7. Tabela de Pedidos (Para o histórico do cliente)
+-- 7. Tabela de Pedidos
 CREATE TABLE IF NOT EXISTS pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -80,28 +82,8 @@ CREATE TABLE IF NOT EXISTS pedidos (
 );
 
 -- =========================================================
--- DADOS INICIAIS (PARA TESTE)
+-- DADOS INICIAIS (SEEDS)
 -- =========================================================
-
--- Inserir um Usuário MASTER para você logar
--- Login: admin
--- Senha: 123 (A hash abaixo é referente a '123')
-INSERT INTO usuario (nome_completo, data_nascimento, sexo, nome_materno, cpf, email, telefone_celular, endereco_completo, login, senha_hash, nivel_acesso)
-VALUES (
-    'Administrador Master', 
-    '1990-01-01', 
-    'masculino', 
-    'Mãe Admin', 
-    '000.000.000-00', 
-    'admin@unipet.com', 
-    '21999999999', 
-    'Rua do Admin, 1', 
-    'admin', 
-    '$2y$10$T1K.Yq1/i.7.e.t.P.q.u.e.s.t.e.H.a.s.h.1.2.3', -- Senha: 123 (Hash ilustrativa, se der erro ao logar, cadastre um novo usuário)
-    'master'
-);
--- OBS: A hash acima pode não funcionar dependendo do salt do seu PHP. 
--- RECOMENDAÇÃO: Cadastre um usuário novo pela tela de registro e mude o nivel_acesso dele para 'master' no banco depois.
 
 -- Inserir Produtos de Exemplo
 INSERT INTO produtos (nome, descricao_curta, descricao_longa, preco, imagem_principal, categoria, spec_idade, spec_linha, spec_pet, spec_porte)
@@ -143,14 +125,19 @@ VALUES
     'Médio'
 );
 
-DROP TABLE IF EXISTS favoritos;
-
-CREATE TABLE favoritos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    produto_id INT NOT NULL,
-    data_adicionado DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(usuario_id, produto_id),
-    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE,
-    FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
+-- Usuário Admin (Senha: 123123123)
+-- OBS: Recomenda-se criar um novo via sistema para garantir que o hash funcione
+INSERT INTO usuario (nome_completo, data_nascimento, sexo, nome_materno, cpf, email, telefone_celular, endereco_completo, login, senha_hash, nivel_acesso)
+VALUES (
+    'Administrador Master', 
+    '1990-01-01', 
+    'masculino', 
+    'Mãe Admin', 
+    '000.000.000-00', 
+    'admin@unipet.com', 
+    '21999999999', 
+    'Rua do Admin, 1', 
+    'admin', 
+    '$2y$10$h/3lc.RGwVXoOFiL9bEutunHMLOnHcNdJV71AcyQeRZcWKUJJ4TbG', 
+    'master'
 );
