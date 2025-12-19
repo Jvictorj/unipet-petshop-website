@@ -11,13 +11,13 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.
 } else {
     // Configuração INFINITYFREE (Online)
     // PREENCHA AQUI COM SEUS DADOS:
-    $host = 'sql201.infinityfree.com'; 
-    $user = 'if0_40721207'; // Seu usuário do Painel (MySQL User Name)
-    $pass = '9ow76HNyzV'; // A senha que você criou ao abrir a conta (NÃO é a do banco, é a do painel)
+    $host = ''; 
+    $user = ''; // Seu usuário do Painel (MySQL User Name)
+    $pass = ''; // A senha que você criou ao abrir a conta (NÃO é a do banco, é a do painel)
     
     // O nome do banco geralmente é: id_do_usuario + nome_que_voce_deu
-    // Exemplo: se você criou o banco 'unipet', fica: if0_40721207_unipet
-    $db   = 'if0_40721207_unipet'; 
+    // Exemplo: se você criou o banco 'unipet', fica: 
+    $db   = ''; 
 }
 
 $charset = 'utf8mb4';
