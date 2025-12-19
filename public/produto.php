@@ -1,10 +1,16 @@
 <?php
-// 1. Configuração e Dependências
+// 1. Iniciar sessão
 session_start();
-require_once '../app/includes/functions.php';
-require_once '../app/includes/conexao.php';
 
-// 2. Verifica ID
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// O arquivo está em public/produto.php, então sobe um nível para a raiz
+$path = '../'; 
+
+// 2. Importa conexão e funções (Paths corrigidos para a nova estrutura)
+require_once $path . 'app/config/conexao.php';
+require_once $path . 'app/includes/functions.php';
+
+// 3. Verifica ID
 if (!isset($_GET['id'])) {
     header('Location: index.php');
     exit;
@@ -12,7 +18,7 @@ if (!isset($_GET['id'])) {
 
 $id_produto = (int)$_GET['id'];
 
-// 3. Busca o produto
+// 4. Busca o produto
 try {
     $stmt = $pdo->prepare("SELECT * FROM produtos WHERE id = :id");
     $stmt->execute(['id' => $id_produto]);
@@ -23,10 +29,10 @@ try {
         exit;
     }
 } catch (PDOException $e) {
-    die("Erro de conexão.");
+    die("Erro de conexão ao buscar produto.");
 }
 
-// 4. Lógica de Favoritos
+// 5. Lógica de Favoritos
 $ehFavorito = false;
 if (isset($_SESSION['user_id'])) {
     $stmtFav = $pdo->prepare("SELECT id FROM favoritos WHERE usuario_id = :uid AND produto_id = :pid");
@@ -36,36 +42,31 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
-// --- 5. TRATAMENTO DAS IMAGENS (CORREÇÃO) ---
+// --- 6. TRATAMENTO DAS IMAGENS ---
 $img_str = $produto['imagem_principal'];
 $lista_imagens = [];
 
 if (!empty($img_str)) {
-    // Separa a string onde tem vírgula
-    $lista_imagens = explode(',', $img_str);
-    // Remove espaços em branco extras
-    $lista_imagens = array_map('trim', $lista_imagens);
+    $lista_imagens = array_map('trim', explode(',', $img_str));
 } else {
-    // Imagem padrão se não houver foto
     $lista_imagens = ['sem-foto.png']; 
 }
 
-// A primeira imagem é a capa
 $imagem_capa = $lista_imagens[0];
 
-// 6. Definições da Página
+// 7. Definições da Página
 $pageTitle = "Unipet - " . $produto['nome'];
-$pageCss = ['../assets/css/produto.css']; 
+$pageCss = [$path . 'assets/css/produto.css']; 
 
-require_once '../app/includes/header.php';
+// Include do Header (que já usa a variável $path)
+require_once $path . 'app/includes/header.php';
 ?>
 
 <main>
     <section class="container-produto" id="produto-detalhes">
-        
         <div class="produto-container">
             <div class="produto-slider">
-                <img class="produto-img" src="../assets/img/produtos/<?php echo $imagem_capa; ?>" id="MainImg" alt="<?php echo $produto['nome']; ?>">
+                <img class="produto-img" src="<?php echo $path; ?>assets/img/produtos/<?php echo $imagem_capa; ?>" id="MainImg" alt="<?php echo $produto['nome']; ?>">
                 
                 <?php if(count($lista_imagens) > 1): ?>
                     <button class="nav-btn nav-btn-left" onclick="Imagem_Anterior()">&#10094;</button>
@@ -77,7 +78,7 @@ require_once '../app/includes/header.php';
                 <?php foreach($lista_imagens as $index => $img): ?>
                     <button class="thumbnail-img-btn" onclick="Mostrar_Imagem(<?php echo $index; ?>)">
                         <img class="thumbnail-img <?php echo $index === 0 ? 'active' : ''; ?>" 
-                             src="../assets/img/produtos/<?php echo $img; ?>" 
+                             src="<?php echo $path; ?>assets/img/produtos/<?php echo $img; ?>" 
                              alt="Foto <?php echo $index + 1; ?>">
                     </button>
                 <?php endforeach; ?>
@@ -90,11 +91,11 @@ require_once '../app/includes/header.php';
             
             <div class="favorito-box" style="margin: 10px 0;">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="../app/actions/favoritar.php?id=<?php echo $produto['id']; ?>" class="fav-btn" title="Favoritar">
+                    <a href="<?php echo $path; ?>app/actions/shop/favoritar.php?id=<?php echo $produto['id']; ?>" class="fav-btn" title="Favoritar">
                         <i class="bi bi-heart<?php echo $ehFavorito ? '-fill' : ''; ?>" style="color: <?php echo $ehFavorito ? 'red' : 'gray'; ?>"></i>
                     </a>
                 <?php else: ?>
-                    <a href="login.php" class="fav-btn"><i class="bi bi-heart"></i></a>
+                    <a href="auth/login.php" class="fav-btn"><i class="bi bi-heart"></i></a>
                 <?php endif; ?>
             </div>
 
@@ -107,7 +108,7 @@ require_once '../app/includes/header.php';
                         <option value="">Padrão (Unidade)</option>
                     </select>
                     
-                    <form action="../app/actions/adicionar_carrinho.php" method="POST" style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
+                    <form action="<?php echo $path; ?>app/actions/shop/adicionar_carrinho.php" method="POST" style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
                         <input type="hidden" name="produto_id" value="<?php echo $produto['id']; ?>">
                         <input type="hidden" name="qtd" id="form-qtd" value="1">
 
@@ -147,14 +148,10 @@ require_once '../app/includes/header.php';
                     <span class="spec-key">Idade</span>
                     <span class="spec-valor"><?php echo $produto['spec_idade'] ?? 'Todas'; ?></span>
                 </li>
-            </ul>
-            <ul>
                 <li class="especificaçao-li">
                     <span class="spec-key">Pet</span>
                     <span class="spec-valor"><?php echo $produto['categoria']; ?></span>
                 </li>
-            </ul>
-            <ul>
                 <li class="especificaçao-li-gray">
                     <span class="spec-key">Porte</span>
                     <span class="spec-valor"><?php echo $produto['spec_porte'] ?? 'Todos'; ?></span>
@@ -164,6 +161,6 @@ require_once '../app/includes/header.php';
     </section>
 </main>
 
-<script src="../assets/js/produto.js"></script>
+<script src="<?php echo $path; ?>assets/js/produto.js"></script>
 
-<?php require_once '../app/includes/footer.php'; ?>
+<?php require_once $path . 'app/includes/footer.php'; ?>

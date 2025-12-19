@@ -1,20 +1,25 @@
 <?php
 // 1. Iniciar sessão e conexões
 session_start();
-require_once '../app/includes/functions.php';
-require_once '../app/includes/conexao.php';
+
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+$path = '../'; 
+
+// Ajuste dos caminhos dos includes
+require_once $path . 'app/includes/functions.php';
+require_once $path . 'app/config/conexao.php'; // Caminho corrigido conforme sua árvore
 
 $pageTitle = "Carrinho | Unipet";
-$pageCss = ['../assets/css/carrinho.css']; 
+$pageCss = [$path . 'assets/css/carrinho.css']; 
 
-require_once '../app/includes/header.php';
+require_once $path . 'app/includes/header.php';
 
 // 2. Lógica para buscar os produtos do carrinho
 $produtos_no_carrinho = [];
 $total_pedido = 0;
 
 if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
-    // Pega os IDs dos produtos salvos na sessão (ex: 1, 5, 8)
+    // Pega os IDs dos produtos salvos na sessão
     $ids = implode(',', array_keys($_SESSION['carrinho']));
     
     try {
@@ -24,7 +29,6 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
         $stmt->execute();
         $produtos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Monta a lista final combinando dados do banco com a quantidade da sessão
         foreach ($produtos_db as $prod) {
             $id = $prod['id'];
             $qtd = $_SESSION['carrinho'][$id];
@@ -82,7 +86,7 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
                         <div class="containerproduto" style="display: flex; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                             
                             <div class="titulo" style="display: flex; align-items: center; gap: 10px;">
-                                <img src="../assets/img/produtos/<?php echo $item['imagem']; ?>" alt="Foto" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                <img src="<?php echo $path; ?>assets/img/produtos/<?php echo $item['imagem']; ?>" alt="Foto" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
                                 <p style="font-size: 0.9rem; margin: 0;"><?php echo $item['nome']; ?></p>
                             </div>
 
@@ -91,8 +95,14 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
                             </div>
 
                             <div class="variaveis">
-                                <div style="border: 1px solid #ccc; border-radius: 5px; padding: 5px; display: inline-block;">
-                                    <?php echo $item['qtd']; ?>
+                                <div style="display: flex; align-items: center; gap: 10px; border: 1px solid #ccc; border-radius: 5px; padding: 5px;">
+                                    <a href="<?php echo $path; ?>app/actions/shop/atualizar_carrinho.php?id=<?php echo $item['id']; ?>&operacao=diminuir" 
+                                    style="text-decoration: none; color: #333; font-weight: bold; padding: 0 5px;">-</a>
+                                    
+                                    <span><?php echo $item['qtd']; ?></span>
+                                    
+                                    <a href="<?php echo $path; ?>app/actions/shop/atualizar_carrinho.php?id=<?php echo $item['id']; ?>&operacao=aumentar" 
+                                    style="text-decoration: none; color: #333; font-weight: bold; padding: 0 5px;">+</a>
                                 </div>
                             </div>
 
@@ -101,7 +111,7 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
                             </div>
 
                             <div class="variaveis" style="width: 50px; text-align: center;">
-                                <a href="../app/actions/remover_carrinho.php?id=<?php echo $item['id']; ?>" style="color: red; font-size: 1.5rem;" title="Remover">
+                                <a href="<?php echo $path; ?>app/actions/shop/remover_carrinho.php?id=<?php echo $item['id']; ?>" style="color: red; font-size: 1.5rem;" title="Remover">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </div>
@@ -169,7 +179,7 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
             </div>
             <div class="imgformadepagamentos">
                 <div class="imgpagmentos">
-                    <img src="../assets/img/payment.png" alt="Pagamentos" style="max-width: 100%;">
+                    <img src="<?php echo $path; ?>assets/img/payment.png" alt="Pagamentos" style="max-width: 100%;">
                 </div>
             </div>
         </div>
@@ -177,4 +187,4 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0) {
     </section>
 </main>
 
-<?php require_once '../app/includes/footer.php'; ?>
+<?php require_once $path . 'app/includes/footer.php'; ?>

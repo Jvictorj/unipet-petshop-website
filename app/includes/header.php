@@ -1,32 +1,18 @@
 <?php
 // --- 1. CONFIGURAÇÃO DE CAMINHOS ---
-// Define o caminho base para assets e includes dependendo de onde o arquivo é chamado
-// Se a variável $path já existir (definida na página pai), usa ela. Se não, tenta descobrir.
 if (!isset($path)) {
-    // Se o arquivo atual está dentro de uma subpasta (ex: public/admin/painel.php)
-    if (file_exists('../../assets')) {
-        $path = '../../';
-    } 
-    // Se o arquivo atual está na raiz da public (ex: public/index.php)
-    elseif (file_exists('../assets')) {
-        $path = '../';
-    } 
-    // Fallback
-    else {
-        $path = '../';
-    }
+    if (file_exists('../../assets')) { $path = '../../'; } 
+    elseif (file_exists('../assets')) { $path = '../'; } 
+    else { $path = '../'; }
 }
 
-// --- 2. CONEXÃO COM BANCO (Mini-Cart) ---
+// --- 2. CONEXÃO COM BANCO (Necessário para o Modal) ---
 if (!isset($pdo)) {
-    // Tenta incluir usando o caminho base calculado
-    $arqConexao = $path . 'app/includes/conexao.php';
-    if (file_exists($arqConexao)) {
-        require_once $arqConexao;
-    }
+    $arqConexao = $path . 'app/config/conexao.php';
+    if (file_exists($arqConexao)) { require_once $arqConexao; }
 }
 
-// --- 3. LÓGICA DO CARRINHO (Modal) ---
+// --- 3. LÓGICA DO MINI-CARRINHO (Para o Modal) ---
 $itensModal = [];
 $totalModal = 0;
 $qtdItensModal = 0;
@@ -34,7 +20,6 @@ $qtdItensModal = 0;
 if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($pdo)) {
     try {
         $ids = implode(',', array_keys($_SESSION['carrinho']));
-        // Verifica se há IDs válidos antes de consultar
         if (!empty($ids)) {
             $sqlModal = "SELECT id, nome, preco, imagem_principal FROM produtos WHERE id IN ($ids)";
             $stmtModal = $pdo->prepare($sqlModal);
@@ -64,9 +49,7 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
                 ];
             }
         }
-    } catch (Exception $e) {
-        // Silêncio
-    }
+    } catch (Exception $e) { /* Silêncio */ }
 }
 ?>
 <!DOCTYPE html>
@@ -78,9 +61,10 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
     
     <link rel="shortcut icon" href="<?php echo $path; ?>assets/img/favicon/icon-unipet.png" type="image/x-icon">
     
-    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/menufixo.css">
-    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/modal.css">
-    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/footer.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/global/menufixo.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/global/modal.css">
+    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/global/footer.css">
+    
     <link rel="stylesheet" href="<?php echo $path; ?>assets/css/darkmode.css">
 
     <?php if (isset($pageCss) && is_array($pageCss)): ?>
@@ -90,9 +74,10 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
     <?php endif; ?>
  
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    
-    <script src="<?php echo $path; ?>assets/js/menumobile.js" defer></script> <script src="<?php echo $path; ?>assets/java/menu.js" defer></script> <script src="<?php echo $path; ?>assets/java/modal.js" defer></script>
-    <script src="<?php echo $path; ?>assets/java/darkmode.js" defer></script>
+
+    <script src="<?php echo $path; ?>assets/js/menumobile.js" defer></script> 
+    <script src="<?php echo $path; ?>assets/js/modal.js" defer></script>
+    <script src="<?php echo $path; ?>assets/js/darkmode.js" defer></script>
 </head>
 <body>
     
@@ -120,9 +105,11 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
 
         <div class="iconeslogin">
           <div class="iconlogin">
-              <a href="<?php echo $path; ?>public/contato.php" title="Contato">
-                  <i class="bi bi-telephone-fill" style="font-size:20px;"></i>
-              </a>
+            <?php if(isset($_SESSION['user_id'])): ?>
+              <a href="<?php echo $path; ?>public/cliente/contato.php" title="Contato"><i class="bi bi-telephone-fill" style="font-size:20px;"></i></a>
+            <?php else: ?>
+                <a href="<?php echo $path; ?>public/auth/login.php" title="Login"><i class="bi bi-telephone-fill" style="font-size:20px;"></i></a>
+            <?php endif; ?>
           </div>
           
           <div class="iconlogin">
@@ -136,7 +123,7 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
           <div class="iconlogin" style="position: relative;">
               <button id="open-modal" title="Carrinho">
                   <i class="bi bi-cart2" style="font-size:20px;"></i>
-                  <?php if($qtdItensModal > 0): ?>
+                  <?php if(isset($qtdItensModal) && $qtdItensModal > 0): ?>
                     <span style="position: absolute; top: -5px; right: -5px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px;">
                         <?php echo $qtdItensModal; ?>
                     </span>
@@ -154,8 +141,7 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
             
             <div class="modal-body">
                 <div class="container-modal">
-                  
-                  <?php if(count($itensModal) > 0): ?>
+                  <?php if(isset($itensModal) && count($itensModal) > 0): ?>
                       <div class="lista-modal" style="max-height: 300px; overflow-y: auto; width: 100%;">
                           <?php foreach($itensModal as $item): ?>
                               <div class="item-modal" style="display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; align-items: center;">
@@ -170,26 +156,30 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
                               </div>
                           <?php endforeach; ?>
                       </div>
-
                       <div class="total-modal" style="margin-top: 10px; text-align: right;">
                           <p style="font-size: 1.2rem; font-weight: bold; color: #ed6335;">Total: R$ <?php echo number_format($totalModal, 2, ',', '.'); ?></p>
                       </div>
-
                       <div class="buttonmodal" style="margin-top: 15px;">
-                          <a href="<?php echo $path; ?>public/cliente/carrinho.php" style="text-decoration: none;">
-                              <button class="btnmodal" style="width: 100%;">Ir para Pagamento</button>
-                          </a>
-                      </div>
+                            <?php if(isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $path; ?>public/carrinho.php" style="text-decoration: none;">
+                                    <button class="btnmodal" style="width: 100%;">Ir para Pagamento</button>
+                                </a>
+                            <?php else: ?>
+                                <a href="<?php echo $path; ?>public/auth/login.php" title="Login" style="text-decoration: none;">
+                                    <button class="btnmodal" style="width: 100%;">
+                                        <i class="bi bi-person" style="font-size: 20px; margin-right: 10px;"></i> Ir para Pagamento
+                                    </button>
+                                </a>
+                            <?php endif; ?>
+                        </div>      
 
                   <?php else: ?>
                       <div class="paragrafo1"><p><b>Seu carrinho está vazio</b></p></div>
                       <div class="sacola-modal"> <i class="bi bi-cart-x" style="font-size:40px; color: #ccc;"></i></div>
-                      <div class="paragrafo1"><p>Navegue pela loja e adicione produtos.</p></div>
                       <div class="buttonmodal">
                           <button class="btnmodal" onclick="document.getElementById('close-modal').click()">Continuar Comprando</button>
                       </div>
                   <?php endif; ?>
-
                 </div>
             </div>
           </div>
@@ -199,10 +189,10 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
                 <?php 
                     $painelLink = ($path . 'public/cliente/painel.php');
                     if(isset($_SESSION['user_nivel_acesso']) && in_array($_SESSION['user_nivel_acesso'], ['admin', 'master'])) {
-                        $painelLink = ($path . 'public/admin/painel.php'); // Se tiver painel admin separado
+                        $painelLink = ($path . 'public/admin/painel.php');
                     }
                 ?>
-                <a href="<?php echo $path; ?>public/cliente/painel.php" title="Meu Perfil"><i class="bi bi-person-check-fill" style="font-size:20px;"></i></a>
+                <a href="<?php echo $painelLink; ?>" title="Meu Perfil"><i class="bi bi-person-check-fill" style="font-size:20px;"></i></a>
                 <a href="<?php echo $path; ?>app/actions/auth/logout.php" title="Sair" style="margin-left: 10px;"><i class="bi bi-box-arrow-right" style="font-size:20px;"></i></a>
             <?php else: ?>
                 <a href="<?php echo $path; ?>public/auth/login.php" title="Entrar"><i class="bi bi-person" style="font-size:20px;"></i></a>
@@ -253,7 +243,12 @@ if (isset($_SESSION['carrinho']) && count($_SESSION['carrinho']) > 0 && isset($p
                     <ul>
                         <li class="li-dropdown"><div class="dificil"><a href="<?php echo $path; ?>public/categoria.php?tipo=Todos">Todos</a></div></li>
                         <li class="li-dropdown"><div class="dificil"><a href="<?php echo $path; ?>public/cliente/carrinho.php">Meu Carrinho</a></div></li> 
-                        </ul>
+                        <?php if(isset($_SESSION['user_id'])): ?>
+                            <li class="li-dropdown"><div class="dificil"><a href="<?php echo $path; ?>app/actions/auth/logout.php">Sair</a></div></li>
+                        <?php else: ?>
+                             <li class="li-dropdown"><div class="dificil"><a href="<?php echo $path; ?>public/auth/login.php">Login</a></div></li>
+                        <?php endif; ?>
+                    </ul>
                 </nav>
             </div>
             <div class="overlay-menu" id="overlay-menu"></div>

@@ -2,8 +2,12 @@
 // Regra 2: Iniciar sessão
 session_start();
 
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// Define que estamos 2 níveis abaixo da raiz (public/cliente/)
+$path = '../../'; 
+
 // Regra 1: Includes com caminho relativo correto
-require_once '../app/includes/functions.php';
+require_once $path . 'app/includes/functions.php';
 
 // OPCIONAL: Se você quiser que APENAS usuários logados enviem mensagem, descomente a linha abaixo:
 // ensureUser(); 
@@ -11,17 +15,18 @@ require_once '../app/includes/functions.php';
 // Configuração da Página
 $pageTitle = "Unipet - Fale Conosco";
 
-// CSS Específico desta página (O header já carrega o footer.css, menufixo.css e modal.css)
-$pageCss = ['../assets/css/contato.css'];
+// CSS Específico desta página
+// Aponta para assets/css/cliente/contato.css (baseado no seu Tree)
+$pageCss = [$path . 'assets/css/cliente/contato.css'];
 
 // Inclusão do Cabeçalho
-require_once '../app/includes/header.php';
+require_once $path . 'app/includes/header.php';
 ?>
 
 <body>
     <section class="form-container">
         <div class="container">
-            <form method="post" action="../app/actions/envia.php">
+            <form method="post" action="<?php echo $path; ?>app/actions/envia.php">
                 <h1>Entre em contato </h1>
                 <p> Preencha o formulário abaixo e entraremos em contato com você.</p>
                 
@@ -51,5 +56,5 @@ require_once '../app/includes/header.php';
 
 <?php
 // Inclusão do Rodapé
-require_once '../app/includes/footer.php';
+require_once $path . 'app/includes/footer.php';
 ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Verifica se os dados foram enviados
+// Verifica se os dados foram enviados via POST
 if (isset($_POST['produto_id'])) {
     
     $id_produto = (int)$_POST['produto_id'];
@@ -12,28 +12,29 @@ if (isset($_POST['produto_id'])) {
         $qtd = 1;
     }
 
-    // Inicializa o carrinho se não existir
+    // Inicializa o carrinho na sessão se não existir
     if (!isset($_SESSION['carrinho'])) {
         $_SESSION['carrinho'] = [];
     }
 
-    // Se o produto já estiver no carrinho, soma a quantidade
+    // Se o produto já estiver no carrinho, soma a quantidade solicitada
     if (isset($_SESSION['carrinho'][$id_produto])) {
         $_SESSION['carrinho'][$id_produto] += $qtd;
     } else {
-        // Se não, adiciona novo
+        // Se não, adiciona o novo produto com a quantidade inicial
         $_SESSION['carrinho'][$id_produto] = $qtd;
     }
 
-    // Opcional: Definir uma mensagem de sucesso para exibir na próxima página
-    // $_SESSION['msg_sucesso'] = "Produto adicionado ao carrinho!";
+    // Define uma mensagem opcional de sucesso (pode ser exibida via Toast no frontend)
+    $_SESSION['sucesso_carrinho'] = "Produto adicionado com sucesso!";
 
-    // Redireciona para o Carrinho para o usuário ver o resultado
-    header('Location: ../../public/carrinho.php');
+    // --- REDIRECIONAMENTO ---
+    // Sair de shop -> actions -> app (3 níveis) para acessar a raiz e entrar em public/
+    header('Location: ../../../public/carrinho.php');
     exit;
 
 } else {
-    // Se tentar acessar direto sem post, volta para a home
-    header('Location: ../../public/index.php');
+    // Se tentar acessar o script diretamente via URL (GET), volta para a home
+    header('Location: ../../../public/index.php');
     exit;
 }

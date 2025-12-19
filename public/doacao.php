@@ -42,7 +42,7 @@ require_once '../app/includes/header.php';
         </div>
         
         <div class="videodescription">
-            <video class="videosrc" src="../Video/quemsomos/Vídeo onde mostra o cachorro da raça labrador utilizando o serviço banho e tosa da petz.mp4" autoplay muted loop></video>
+            <video class="videosrc" src="../videos/quemsomos/Vídeo onde mostra o cachorro da raça labrador utilizando o serviço banho e tosa da petz.mp4" autoplay muted loop></video>
         </div>
     </div>
 </section>

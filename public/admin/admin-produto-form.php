@@ -1,12 +1,26 @@
 <?php
+// Regra 2: Iniciar sessão
 session_start();
-require_once '../app/includes/conexao.php';
-require_once '../app/includes/functions.php';
+
+// --- 1. CONFIGURAÇÃO DE CAMINHOS ---
+// O arquivo está em public/admin/, sobe 2 níveis para a raiz
+$path = '../../'; 
+
+// Regra 1: Includes (Conexão e Funções) usando $path
+// Note: ajustado para app/config/ conforme sua árvore anterior
+require_once $path . 'app/config/conexao.php';
+require_once $path . 'app/includes/functions.php';
 
 // Segurança
-ensureAuthenticated();
-// Se quiser restringir apenas para ADMIN:
-// if ($_SESSION['user_nivel_acesso'] !== 'admin' && $_SESSION['user_nivel_acesso'] !== 'master') { header('Location: painel.php'); exit; }
+if (function_exists('ensureAuthenticated')) {
+    ensureAuthenticated();
+}
+
+// Opcional: Restringir acesso
+if (!isset($_SESSION['user_nivel_acesso']) || !in_array($_SESSION['user_nivel_acesso'], ['admin', 'master'])) {
+    header('Location: ../cliente/painel.php'); 
+    exit; 
+}
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 $produto = null;
@@ -20,10 +34,11 @@ if ($id) {
 
 $pageTitle = $id ? "Editar Produto" : "Cadastrar Novo Produto";
 
-// Adicionei o CSS novo aqui
-$pageCss = ['../assets/css/admin-form.css'];
+// CSS Específico usando $path
+$pageCss = [$path . 'assets/css/admin/admin-form.css'];
 
-require_once '../app/includes/header.php';
+// Include do Cabeçalho
+require_once $path . 'app/includes/header.php';
 ?>
 
 <main class="admin-main">
@@ -32,14 +47,14 @@ require_once '../app/includes/header.php';
             <i class="bi bi-box-seam"></i> <?php echo $pageTitle; ?>
         </h2>
         
-        <form action="../app/actions/produto_salvar.php" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo $path; ?>app/actions/admin/produto_salvar.php" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="id" value="<?php echo $produto['id'] ?? ''; ?>">
             
             <div class="form-group">
                 <label for="nome">Nome do Produto:</label>
                 <input type="text" name="nome" id="nome" class="form-control" 
-                       value="<?php echo $produto['nome'] ?? ''; ?>" 
+                       value="<?php echo htmlspecialchars($produto['nome'] ?? ''); ?>" 
                        placeholder="Ex: Ração Golden 15kg" required>
             </div>
 
@@ -80,7 +95,7 @@ require_once '../app/includes/header.php';
             <div class="form-group">
                 <label for="descricao">Descrição Detalhada:</label>
                 <textarea name="descricao" id="descricao" class="form-control" rows="6" 
-                          placeholder="Detalhes técnicos, ingredientes, indicação..."><?php echo $produto['descricao_longa'] ?? ''; ?></textarea>
+                          placeholder="Detalhes técnicos..."><?php echo htmlspecialchars($produto['descricao_longa'] ?? ''); ?></textarea>
             </div>
 
             <button type="submit" class="btn-submit">
@@ -93,4 +108,7 @@ require_once '../app/includes/header.php';
     </div>
 </main>
 
-<?php require_once '../app/includes/footer.php'; ?>
+<?php 
+// Inclusão do Rodapé usando $path
+require_once $path . 'app/includes/footer.php'; 
+?>

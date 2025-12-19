@@ -3,7 +3,7 @@
 session_start();
 
 // Regra 1: Includes com caminho relativo correto
-require_once '../app/includes/functions.php';
+require_once '../../app/includes/functions.php';
 
 // Verificação: Se o usuário já estiver logado, manda pro painel
 if (isset($_SESSION['user_id'])) {
@@ -24,12 +24,12 @@ if (isset($_SESSION['user_id'])) {
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <link rel="shortcut icon" href="../assets/img/favicon/icon-unipet.png" type="image/png">
+  <link rel="shortcut icon" href="../../assets/img/favicon/icon-unipet.png" type="image/png">
 
-  <link rel="stylesheet" href="../assets/css/register.css">
-  <link rel="stylesheet" href="../assets/css/modal.css">
-  <link rel="stylesheet" href="../assets/css/menufixo.css">
-  <link rel="stylesheet" href="../assets/css/footer.css">
+  <link rel="stylesheet" href="../../assets/css/register.css">
+  <link rel="stylesheet" href="../../assets/css/modal.css">
+  <link rel="stylesheet" href="../../assets/css/menufixo.css">
+  <link rel="stylesheet" href="../../assets/css/footer.css">
 
   <script src="../assets/js/validacao.js" defer></script>
 </head>
@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
       <div class="containertop">
         <div class="logoimglogin"> 
           <a href="index.php">
-            <img src="../assets/img/fotoslogin/unipetdarkmode-removebg-preview.png" alt="Logo" id="logoimagemdarkmodee">
+            <img src="../../assets/img/fotoslogin/unipetdarkmode-removebg-preview.png" alt="Logo" id="logoimagemdarkmodee">
           </a>
         </div>
         <div class="mensagemlogin">
@@ -71,7 +71,7 @@ if (isset($_SESSION['user_id'])) {
       }
       ?>
 
-      <form method="post" action="../app/actions/cadastro.php" class="containerdireita" id="form">
+      <form method="post" action="../../app/actions/auth/cadastro.php" class="containerdireita" id="form">
         
         <div class="input-box">
           <input type="text" name="nome" placeholder="Nome Completo" id="nome" required>

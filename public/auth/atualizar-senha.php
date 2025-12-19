@@ -1,15 +1,30 @@
 <?php
+// Regra 2: Iniciar sessão
 session_start();
-require_once '../app/includes/functions.php';
+
+// --- CONFIGURAÇÃO DE CAMINHOS ---
+// Define que estamos 2 níveis abaixo da raiz (public/auth/ ou public/cliente/)
+$path = '../../'; 
+
+// Regra 1: Includes
+require_once $path . 'app/config/conexao.php';
+require_once $path . 'app/includes/functions.php';
 
 // Segurança
-ensureAuthenticated();
+if (function_exists('ensureAuthenticated')) {
+    ensureAuthenticated();
+} elseif (!isset($_SESSION['user_id'])) {
+    header('Location: ' . $path . 'public/auth/login.php');
+    exit;
+}
 
 $pageTitle = "Atualizar Senha - Unipet";
-// CSS Específico para senha
-$pageCss = ['../assets/css/areas/cliente/senha.css']; 
 
-require_once '../app/includes/header.php';
+// CSS Específico (Caminho corrigido para assets/css/cliente/senha.css conforme seu tree)
+$pageCss = [$path . 'assets/css/cliente/senha.css']; 
+
+// Include do Header (que já usa a variável $path internamente)
+require_once $path . 'app/includes/header.php';
 ?>
 
 <main>
@@ -37,7 +52,7 @@ require_once '../app/includes/header.php';
                 </div>
             <?php endif; ?>
 
-            <form action="../app/actions/atualizar_senha.php" method="POST" class="senha-form">
+            <form action="<?php echo $path; ?>app/actions/atualizar-senha.php" method="POST" class="senha-form">
                 
                 <div class="grupo-input">
                     <label for="nova_senha">Nova Senha</label>
@@ -58,7 +73,7 @@ require_once '../app/includes/header.php';
                 <button type="submit" class="btn-salvar">Salvar Nova Senha</button>
 
                 <div class="voltar-link">
-                    <a href="painel.php"><i class="bi bi-arrow-left"></i> Cancelar e Voltar</a>
+                    <a href="../cliente/painel.php"><i class="bi bi-arrow-left"></i> Cancelar e Voltar</a>
                 </div>
 
             </form>
@@ -66,4 +81,7 @@ require_once '../app/includes/header.php';
     </div>
 </main>
 
-<?php require_once '../app/includes/footer.php'; ?>
+<?php 
+// Inclusão do Rodapé usando o $path
+require_once $path . 'app/includes/footer.php'; 
+?>

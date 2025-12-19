@@ -3,8 +3,8 @@
 session_start();
 
 // Regra 1: Includes (Conexão e Funções)
-require_once '../app/includes/conexao.php'; // Necessário para usar $pdo
-require_once '../app/includes/functions.php';
+require_once '../../app/config/conexao.php'; // Necessário para usar $pdo
+require_once '../../app/includes/functions.php';
 
 // Segurança: Apenas logados
 ensureUser();
@@ -13,9 +13,10 @@ $pageTitle = "Dados Pessoais - Área do Cliente";
 
 // CSS Específico
 $pageCss = [
-    '../assets/css/areas/cliente/clientestyle.css',
-    '../assets/css/areas/cliente/dadospessoais.css'
+    '../../assets/css/cliente/clientestyle.css',
+    '../../assets/css/cliente/dadospessoais.css'
 ];
+
 
 // --- LÓGICA PARA BUSCAR DADOS DO USUÁRIO ---
 try {
@@ -32,7 +33,7 @@ try {
     die("Erro ao carregar dados.");
 }
 
-require_once '../app/includes/header.php';
+require_once '../../app/includes/header.php';
 
 // Captura nome para a saudação
 $nomeUsuario = $dados['nome_completo'];
@@ -132,5 +133,5 @@ $nomeUsuario = $dados['nome_completo'];
 
 <?php
 // Inclusão do Rodapé
-require_once '../app/includes/footer.php';
+require_once '../../app/includes/footer.php';
 ?>
