@@ -32,7 +32,7 @@ require_once '../app/includes/header.php';
             <i class="bi bi-box-seam"></i> <?php echo $pageTitle; ?>
         </h2>
         
-        <form action="../app/acao/produto_salvar.php" method="POST" enctype="multipart/form-data">
+        <form action="../app/actions/produto_salvar.php" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="id" value="<?php echo $produto['id'] ?? ''; ?>">
             

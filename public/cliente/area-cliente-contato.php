@@ -67,7 +67,7 @@ $nomeUsuario = $_SESSION['user_name'] ?? 'Cliente';
             </div>
 
             <div class="contenet-contato">
-                <form action="../app/acao/envia.php" method="POST">
+                <form action="../app/actions/envia.php" method="POST">
                     <div class="contener-inputs">
                         
                         <div class="inputs">

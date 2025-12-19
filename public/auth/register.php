@@ -71,7 +71,7 @@ if (isset($_SESSION['user_id'])) {
       }
       ?>
 
-      <form method="post" action="../app/acao/cadastro.php" class="containerdireita" id="form">
+      <form method="post" action="../app/actions/cadastro.php" class="containerdireita" id="form">
         
         <div class="input-box">
           <input type="text" name="nome" placeholder="Nome Completo" id="nome" required>

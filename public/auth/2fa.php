@@ -65,7 +65,7 @@ unset($_SESSION['errors']);
             </div>
         <?php endif; ?>
 
-        <form method="post" action="../app/acao/validar_2fa.php" class="containerdireita">
+        <form method="post" action="../app/actions/validar_2fa.php" class="containerdireita">
           <div class="tiltelogin">
             <p><b>Pergunta de Segurança</b></p>
             <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">Confirme seu CPF ou Nome Materno</p>

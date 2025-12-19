@@ -53,7 +53,7 @@ if (isset($_SESSION['user_id'])) {
               </div>
           </div>
           
-          <form action="../app/acao/solicitar_recuperacao.php" method="POST" class="containerdireita">
+          <form action="../app/actions/solicitar_recuperacao.php" method="POST" class="containerdireita">
               <div class="tiltelogin">
                   <p><b>Informe seu e-mail abaixo que iremos lhe enviar o link de recuperação.</b></p>
               </div>

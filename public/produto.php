@@ -90,7 +90,7 @@ require_once '../app/includes/header.php';
             
             <div class="favorito-box" style="margin: 10px 0;">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="../app/acao/favoritar.php?id=<?php echo $produto['id']; ?>" class="fav-btn" title="Favoritar">
+                    <a href="../app/actions/favoritar.php?id=<?php echo $produto['id']; ?>" class="fav-btn" title="Favoritar">
                         <i class="bi bi-heart<?php echo $ehFavorito ? '-fill' : ''; ?>" style="color: <?php echo $ehFavorito ? 'red' : 'gray'; ?>"></i>
                     </a>
                 <?php else: ?>
@@ -107,7 +107,7 @@ require_once '../app/includes/header.php';
                         <option value="">Padrão (Unidade)</option>
                     </select>
                     
-                    <form action="../app/acao/adicionar_carrinho.php" method="POST" style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
+                    <form action="../app/actions/adicionar_carrinho.php" method="POST" style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
                         <input type="hidden" name="produto_id" value="<?php echo $produto['id']; ?>">
                         <input type="hidden" name="qtd" id="form-qtd" value="1">
 
