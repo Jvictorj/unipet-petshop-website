@@ -52,7 +52,7 @@ require_once $path . 'app/includes/header.php';
                 </div>
             <?php endif; ?>
 
-            <form action="<?php echo $path; ?>app/actions/atualizar-senha.php" method="POST" class="senha-form">
+            <form action="<?php echo $path; ?>app/actions/auth/atualizar-senha.php" method="POST" class="senha-form">
                 
                 <div class="grupo-input">
                     <label for="nova_senha">Nova Senha</label>

@@ -2,12 +2,14 @@
 session_start();
 
 // 1. Includes corretos usando __DIR__
-require_once __DIR__ . '/../../includes/conexao.php';
+// Caminho: app/actions/auth/atualizar_senha.php
+require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../../includes/functions.php';
 
 // 2. Verificação de Segurança
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../../public/login.php');
+    // Redireciona para a nova localização do login
+    header('Location: ../../../public/auth/login.php');
     exit;
 }
 
@@ -24,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'A senha deve ter pelo menos 6 caracteres.';
     } else {
         // Criptografa
-        $senha_hash = hashPassword($nova_senha);
+        // Certifique-se que a função hashPassword existe em functions.php, senão use password_hash
+        $senha_hash = function_exists('hashPassword') ? hashPassword($nova_senha) : password_hash($nova_senha, PASSWORD_DEFAULT);
         $user_id = $_SESSION['user_id'];
 
         try {
@@ -35,20 +38,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'id' => $user_id
             ]);
 
-            // Sucesso: Manda para o painel com mensagem (opcional)
-            header('Location: ../../public/painel.php?msg=Senha atualizada com sucesso!');
+            // Sucesso: Verifica o nível para redirecionar para o painel correto
+            $redirectUrl = '../../../public/cliente/painel.php'; // Padrão
+            
+            if (isset($_SESSION['user_nivel_acesso']) && in_array($_SESSION['user_nivel_acesso'], ['admin', 'master'])) {
+                $redirectUrl = '../../../public/admin/painel.php';
+            }
+
+            header("Location: $redirectUrl?msg=" . urlencode('Senha atualizada com sucesso!'));
             exit;
 
         } catch (PDOException $e) {
+            // Em produção, logar o erro: error_log($e->getMessage());
             $errors[] = 'Erro no banco de dados. Tente novamente.';
         }
     }
 }
 
-// Se deu erro, volta para o formulário
+// Se deu erro, volta para o formulário na pasta auth
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
-    header('Location: ../../public/atualizar-senha.php');
+    header('Location: ../../../public/auth/atualizar-senha.php');
     exit;
 }
 ?>
