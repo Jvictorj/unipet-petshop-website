@@ -10,7 +10,7 @@
 
 O **Projeto Unipet** é uma aplicação web desenvolvida para gerenciar um petshop que vende produtos relacionados a animais e conecta usuários a locais de adoção. O sistema também oferece funcionalidades para o cadastro e consulta de clientes, controle de estoque e gerenciamento de dados de adoção.
 
-🔗 **Demonstração (Frontend):** [Visualizar aplicação no GitHub Pages](https://unipet-projeto.infinityfreeapp.com/public/index.php)
+🔗 **Demonstração (Frontend):** [Visualizar aplicação no infinityfree](https://unipet-projeto.infinityfreeapp.com/public/index.php)
 
 ---
 
