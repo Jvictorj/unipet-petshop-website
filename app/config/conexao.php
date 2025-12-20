@@ -4,9 +4,16 @@
 /**
  * Carrega variáveis de um arquivo tipo .env
  */
+
+// Se não for localhost, esconde os erros
+if ($_SERVER['SERVER_NAME'] != 'localhost' && $_SERVER['SERVER_NAME'] != '127.0.0.1') {
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+}
 function loadEnv($path) {
     if (!file_exists($path)) return false;
-    
+     
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         if (strpos(trim($line), '#') === 0) continue; // Pula comentários

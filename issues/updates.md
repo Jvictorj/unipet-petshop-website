@@ -68,6 +68,10 @@ Este documento acompanha as **tarefas necessárias para estabilizar o sistema** 
 * [ ] Sistema de avaliação (estrelas + comentários)
 * [ ] E-mails automáticos de pedido (PHPMailer)
 * [ ] Recuperação de senha real por e-mail
+* [ ] Adicionar CEP API
+* [ ] CPF Validator
+* [ ] nome do usario aparece quando logado no dashboard e outros lugares necessarios
+* [ ] melhora o css do error de validação em login, esqueci senha e cadastro
 
 ---
 
